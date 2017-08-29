@@ -54,8 +54,6 @@ app.getData = function(){
 			primary_release_year: 2010,
 			sort_by: 'vote_average.desc'
 		}
-	}).then(function(res) {
-		console.log(res);
 	})
 	  
 	$.when(yumCallOne, movieCallOne).then(function (res1,res2){
