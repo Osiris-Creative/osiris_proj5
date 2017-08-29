@@ -6,9 +6,9 @@
 
 const app = {};
 
-const app.yumKey = 'bf6ff579ddf44506f1a5ba19a2eb465a';
-const app.yumId = 'f49c0671';
-const app.movieKey = 'dc85e0389c4e0355687d4c1bf7e0d2c1';
+app.yumKey = 'bf6ff579ddf44506f1a5ba19a2eb465a';
+app.yumId = 'f49c0671';
+app.movieKey = 'dc85e0389c4e0355687d4c1bf7e0d2c1';
 
 // events handling
 app.events = function(){
