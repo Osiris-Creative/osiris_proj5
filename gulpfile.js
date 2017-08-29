@@ -31,10 +31,10 @@ gulp.task('html', () => {
 	 }))
 })
 
-gulp.task('watch',["browserSync", "styles", "html"], () => {
+gulp.task('watch',["browserSync", "styles", "html", "scripts"], () => {
 	gulp.watch("./dev/*.html", ["html"], browserSync.reload);
 	gulp.watch("./dev/styles/**/*.scss", ['styles']);
-	gulp.watch("./dev/scripts/.js", browserSync.reload,['scripts']);
+	gulp.watch("./dev/scripts/**/*.js", browserSync.reload,["scripts"]);
 })
 
 gulp.task('browserSync', function() {
