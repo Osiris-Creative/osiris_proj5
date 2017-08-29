@@ -11,30 +11,30 @@ gulp.task('styles', () => {
     .pipe(concat('styles.css'))
     .pipe(gulp.dest('./public/styles/'))
     .pipe(browserSync.reload({
-    	stream: true
+      stream: true
     }))
 });
 
 gulp.task('scripts', () => {
-	return gulp.src('./dev/scripts/*.js')
-	 .pipe(babel({
-	 	presets:['es2015']
-	 }))
-	 .pipe(gulp.dest('./public/scripts'))
+  return gulp.src('./dev/scripts/*.js')
+   .pipe(babel({
+    presets:['es2015']
+   }))
+   .pipe(gulp.dest('./public/scripts'))
 });
 
 gulp.task('html', () => {
-	return gulp.src('./dev/*.html')
-	 .pipe(gulp.dest('./public/'))
-	 .pipe(browserSync.reload({
-	 	stream: true
-	 }))
+  return gulp.src('./dev/*.html')
+   .pipe(gulp.dest('./public/'))
+   .pipe(browserSync.reload({
+    stream: true
+   }))
 })
 
-gulp.task('watch',["browserSync", "styles", "html", "scripts"], () => {
-	gulp.watch("./dev/*.html", ["html"], browserSync.reload);
-	gulp.watch("./dev/styles/**/*.scss", ['styles']);
-	gulp.watch("./dev/scripts/**/*.js", browserSync.reload,["scripts"]);
+gulp.task('watch',["browserSync", "styles", "scripts", "html"], () => {
+  gulp.watch("./dev/*.html", ["html"], browserSync.reload);
+  gulp.watch("./dev/styles/**/*.scss", ['styles']);
+  gulp.watch("./dev/scripts/*.js", ['scripts'], browserSync.reload);
 })
 
 gulp.task('browserSync', function() {
