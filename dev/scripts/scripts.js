@@ -41,16 +41,19 @@ app.getGenre = function (results){
 			return el.name === results.userGenre;
 		});
 		let genreId = genreList[genreIndex].id
-		app.getData(genreId, results);
+		console.log(genreId);
+		let genreName = genreList[genreIndex].name
+		app.getMovieData(genreId, results);
+		app.getYumData(genreName);
 	});
 };	
 
-app.getData = function(genreId, results){
+app.getMovieData = function(genreId,results){
 	// console.log(results)
 	let decadeStart = results.userDecade;
 	let decadeEnd = results.userDecade + 9;
 
-	let movieCallTwo = $.ajax({
+	$.ajax({
 		url: 'https://api.themoviedb.org/3/discover/movie',
 		method: 'GET',
 		dataType: 'json',
@@ -62,10 +65,37 @@ app.getData = function(genreId, results){
 			sort_by: 'popularity.desc',
 			page: 1
 		}
-	})
+	}).then(function(){});
+};
 
-
-	let yumCallOne = $.ajax({
+app.getYumData = function(genreName){
+	let keyWords;
+	switch(genreName){
+		case "Action":
+			keyWords = "spicy";
+			break;
+		case "Comedy":
+			keyWords = "fun party";
+			break;
+		case "Drama":
+			keyWords = "bitter";
+			break;
+		case "Fantasy":
+			keyWords = "medieval";
+			break;
+		case "Horror":
+			keyWords = "scary";
+			break;
+		case "Music":
+			keyWords = "music";
+			break;
+		case "Romance":
+			keyWords = "love";
+			break;
+		case "Science Fiction":
+			keyWords = "alien";	
+	}
+	$.ajax({
 		url:'http://api.yummly.com/v1/api/recipes',
 		method: 'GET',
 		dataType: 'json',
@@ -73,24 +103,25 @@ app.getData = function(genreId, results){
 			_app_id: app.yumId,
 			_app_key: app.yumKey,
 			requirePictures: true,
+			q: keyWords,
 			allowedCourse: "course^course-Snacks",
 			allowedCourse: "course^course-Desserts",
-			allowedCourse: "course^course-Beverages",
-			maxResult: 10,
+			allowedCourse: "course^course-Appetizers",
+			maxResult: 20,
 			format: 'json'
 		}
-	  })
-	  
-	$.when(movieCallTwo, yumCallOne).then(function (res1,res2){
-		console.log(res1,res2);
-	})
-
+	}).then(function(res){
+		console.log(res)
+	}); 
 };
+
+
+
 
 //parse data function
-app.parseData = function(results){
-		
-};
+// app.parseData = function(genreName, results){
+// 	if(genreName === )
+// };
 
 
 // display function
