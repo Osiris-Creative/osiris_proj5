@@ -44,7 +44,7 @@ app.getGenre = function (results){
 		console.log(genreId);
 		let genreName = genreList[genreIndex].name
 		app.getMovieData(genreId, results);
-		app.getYumData(genreName);
+		app.getYumId(genreName);
 	});
 };	
 
@@ -68,7 +68,7 @@ app.getMovieData = function(genreId,results){
 	}).then(function(){});
 };
 
-app.getYumData = function(genreName){
+app.getYumId = function(genreName){
 	let keyWords;
 	switch(genreName){
 		case "Action":
@@ -84,16 +84,16 @@ app.getYumData = function(genreName){
 			keyWords = "medieval";
 			break;
 		case "Horror":
-			keyWords = "scary";
+			keyWords = "brain"
 			break;
 		case "Music":
-			keyWords = "music";
+			keyWords = "soul";
 			break;
 		case "Romance":
 			keyWords = "love";
 			break;
 		case "Science Fiction":
-			keyWords = "alien";	
+			keyWords = "brain";	
 	}
 	$.ajax({
 		url:'http://api.yummly.com/v1/api/recipes',
@@ -111,9 +111,26 @@ app.getYumData = function(genreName){
 			format: 'json'
 		}
 	}).then(function(res){
-		console.log(res)
-	}); 
+		let recipeArr = res.matches;
+	});
+	app.getYumRecipe(recipeId)
 };
+
+app.getYumRecipe = function (recipeId) {
+	$.ajax({
+		url: `http://api.yummly.com/v1/api/recipe/${recipeId}`,
+		method: 'GET',
+		dataType: 'json',
+		data:{
+			_app_id: app.yumId,
+			_app_key: app.yumKey
+		}
+	}).then(function(res){
+		console.log(res)
+	});
+};
+
+
 
 
 
