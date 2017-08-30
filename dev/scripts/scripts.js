@@ -1,6 +1,9 @@
 console.log("test");
 
-
+$("form").on('submit',function (e) {
+	e.preventDefault();
+	console.log("Submitted");
+})
 // create an empty object
 
 const app = {};

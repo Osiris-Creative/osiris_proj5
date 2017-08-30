@@ -2,12 +2,14 @@ const gulp = require("gulp");
 const sass = require("gulp-sass");
 const concat = require("gulp-concat");
 const babel = require("gulp-babel");
+const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 
 
 gulp.task('styles', () => {
   return gulp.src('./dev/styles/**/*.scss')
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
     .pipe(concat('styles.css'))
     .pipe(gulp.dest('./public/styles/'))
     .pipe(browserSync.reload({
@@ -21,6 +23,9 @@ gulp.task('scripts', () => {
     presets:['es2015']
    }))
    .pipe(gulp.dest('./public/scripts'))
+   .pipe(browserSync.reload({
+     stream: true
+   }))
 });
 
 gulp.task('html', () => {
@@ -29,13 +34,13 @@ gulp.task('html', () => {
    .pipe(browserSync.reload({
     stream: true
    }))
-})
+});
 
-gulp.task('watch',["browserSync", "styles", "scripts", "html"], () => {
+gulp.task('watch',["browserSync", "styles"], () => {
   gulp.watch("./dev/*.html", ["html"], browserSync.reload);
   gulp.watch("./dev/styles/**/*.scss", ['styles']);
   gulp.watch("./dev/scripts/*.js", ['scripts'], browserSync.reload);
-})
+});
 
 gulp.task('browserSync', function() {
   browserSync.init({
@@ -50,4 +55,4 @@ gulp.task('browserSync', function() {
   })
 });
 
-gulp.task('default',['watch','styles','scripts','browserSync']);
+gulp.task('default',['watch','styles','scripts']);
