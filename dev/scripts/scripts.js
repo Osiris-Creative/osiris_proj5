@@ -10,9 +10,15 @@ app.movieKey = 'dc85e0389c4e0355687d4c1bf7e0d2c1';
 app.events = function(){
 	$("form").on('submit',function (e) {
 		e.preventDefault();
-		let userChoice = $('#genreChoice').val();
-		console.log(userChoice)
-		app.getGenre(userChoice);	
+		let userGenre = $('#genreChoice').val();
+		// console.log(userGenre)
+		let userDecade = parseInt($('#decadeChoice').val());
+		let results = {
+			userGenre: userGenre,
+			userDecade: userDecade
+		}
+		app.parseData(results);
+		console.log(userDecade);
 	});
 }
 
@@ -24,14 +30,16 @@ app.display = function(){
 
 //parse data function
 
-app.parseData = function(){
+app.parseData = function(results){
+	// if (results.userDecade ===)
+	app.getGenre(results);	
 
 };
 
 // get data function
 
-app.getGenre = function (genrePick){
-	console.log(genrePick)
+app.getGenre = function (results){
+	console.log(results)
 	let movieCallOne = $.ajax({
 		url: 'https://api.themoviedb.org/3/genre/movie/list',
 		method: 'GET',
@@ -46,15 +54,14 @@ app.getGenre = function (genrePick){
 
 		let genreList = res.genres
 		let genreIndex = genreList.findIndex(function(el){
-			return el.name === genrePick
+			return el.name === results.userGenre;
 		});
-		let genreId= genreList[genreIndex].id
-		app.getData(genreId);
+		let genreId = genreList[genreIndex].id
+		app.getData(genreId, results);
 	});
 };	
 
-app.getData = function(genreId){
-	console.log(genreId);
+app.getData = function(genreId, results){
 	let movieCallTwo = $.ajax({
 		url: 'https://api.themoviedb.org/3/discover/movie',
 		method: 'GET',
@@ -62,8 +69,9 @@ app.getData = function(genreId){
 		data: {
 			api_key: app.movieKey,
 			with_genres: genreId,
-			primary_release_year: 2010,
-			sort_by: 'vote_average.desc'
+			"primary_release_date.gte": "1990",
+			"primary_release_date.lte": "1999",
+			sort_by: 'popularity.desc'
 		}
 	})
 
