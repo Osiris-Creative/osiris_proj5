@@ -1,9 +1,3 @@
-console.log("test");
-
-$("form").on('submit',function (e) {
-	e.preventDefault();
-	console.log("Submitted");
-})
 // create an empty object
 
 const app = {};
@@ -14,8 +8,13 @@ app.movieKey = 'dc85e0389c4e0355687d4c1bf7e0d2c1';
 
 // events handling
 app.events = function(){
-
-};
+	$("form").on('submit',function (e) {
+		e.preventDefault();
+		let userChoice = $('#genreChoice').val();
+		console.log(userChoice)
+		app.getGenre(userChoice);	
+	});
+}
 
 // display function
 
@@ -31,7 +30,44 @@ app.parseData = function(){
 
 // get data function
 
-app.getData = function(){
+app.getGenre = function (genrePick){
+	console.log(genrePick)
+	let movieCallOne = $.ajax({
+		url: 'https://api.themoviedb.org/3/genre/movie/list',
+		method: 'GET',
+		dataType: 'json',
+		data: {
+			api_key: app.movieKey,
+			// with_genres: 35,
+			// primary_release_year: 2010,
+			// sort_by: 'vote_average.desc'
+		}
+	}).then(function(res){
+
+		let genreList = res.genres
+		let genreIndex = genreList.findIndex(function(el){
+			return el.name === genrePick
+		});
+		let genreId= genreList[genreIndex].id
+		app.getData(genreId);
+	});
+};	
+
+app.getData = function(genreId){
+	console.log(genreId);
+	let movieCallTwo = $.ajax({
+		url: 'https://api.themoviedb.org/3/discover/movie',
+		method: 'GET',
+		dataType: 'json',
+		data: {
+			api_key: app.movieKey,
+			with_genres: genreId,
+			primary_release_year: 2010,
+			sort_by: 'vote_average.desc'
+		}
+	})
+
+
 	let yumCallOne = $.ajax({
 		url:'http://api.yummly.com/v1/api/recipes',
 		method: 'GET',
@@ -44,19 +80,8 @@ app.getData = function(){
 			format: 'json'
 		}
 	  })
-	let movieCallOne = $.ajax({
-		url: 'https://api.themoviedb.org/3/discover/movie',
-		method: 'GET',
-		dataType: 'json',
-		data: {
-			api_key: app.movieKey,
-			with_genres: 35,
-			primary_release_year: 2010,
-			sort_by: 'vote_average.desc'
-		}
-	})
 	  
-	$.when(yumCallOne, movieCallOne).then(function (res1,res2){
+	$.when(movieCallTwo, yumCallOne).then(function (res1,res2){
 		console.log(res1,res2);
 	})
 
@@ -65,7 +90,7 @@ app.getData = function(){
 
 // make init function
 app.init = function(){
-	app.getData();
+	app.events();
 };
 
 // doc ready
