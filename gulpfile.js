@@ -55,4 +55,4 @@ gulp.task('browserSync', function() {
   })
 });
 
-gulp.task('default',['watch','styles','scripts']);
+gulp.task('default',['watch',"html",'styles','scripts']);

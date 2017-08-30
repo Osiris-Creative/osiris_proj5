@@ -13,28 +13,15 @@ app.events = function(){
 		let userGenre = $('#genreChoice').val();
 		// console.log(userGenre)
 		let userDecade = parseInt($('#decadeChoice').val());
-		let results = {
+		let userSelection = {
 			userGenre: userGenre,
 			userDecade: userDecade
 		}
-		app.parseData(results);
+		app.getGenre(userSelection);
 		console.log(userDecade);
 	});
 }
 
-// display function
-
-app.display = function(){
-
-};
-
-//parse data function
-
-app.parseData = function(results){
-	// if (results.userDecade ===)
-	app.getGenre(results);	
-
-};
 
 // get data function
 
@@ -46,12 +33,9 @@ app.getGenre = function (results){
 		dataType: 'json',
 		data: {
 			api_key: app.movieKey,
-			// with_genres: 35,
-			// primary_release_year: 2010,
-			// sort_by: 'vote_average.desc'
 		}
 	}).then(function(res){
-
+		console.log(res)
 		let genreList = res.genres
 		let genreIndex = genreList.findIndex(function(el){
 			return el.name === results.userGenre;
@@ -62,6 +46,10 @@ app.getGenre = function (results){
 };	
 
 app.getData = function(genreId, results){
+	// console.log(results)
+	let decadeStart = results.userDecade;
+	let decadeEnd = results.userDecade + 9;
+
 	let movieCallTwo = $.ajax({
 		url: 'https://api.themoviedb.org/3/discover/movie',
 		method: 'GET',
@@ -69,9 +57,10 @@ app.getData = function(genreId, results){
 		data: {
 			api_key: app.movieKey,
 			with_genres: genreId,
-			"primary_release_date.gte": "1990",
-			"primary_release_date.lte": "1999",
-			sort_by: 'popularity.desc'
+			"primary_release_date.gte": decadeStart,
+			"primary_release_date.lte": decadeEnd,
+			sort_by: 'popularity.desc',
+			page: 1
 		}
 	})
 
@@ -83,7 +72,10 @@ app.getData = function(genreId, results){
 		data:{
 			_app_id: app.yumId,
 			_app_key: app.yumKey,
-			q: 'onion soup',
+			requirePictures: true,
+			allowedCourse: "course^course-Snacks",
+			allowedCourse: "course^course-Desserts",
+			allowedCourse: "course^course-Beverages",
 			maxResult: 10,
 			format: 'json'
 		}
@@ -95,6 +87,17 @@ app.getData = function(genreId, results){
 
 };
 
+//parse data function
+app.parseData = function(results){
+		
+};
+
+
+// display function
+
+app.display = function(){
+
+};
 
 // make init function
 app.init = function(){
