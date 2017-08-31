@@ -53,6 +53,8 @@ app.getGenre = function (results){
 	});
 };	
 
+
+
 app.getMovieData = function(genreId,results){
 	// console.log(results)
 	let decadeStart = results.userDecade;
@@ -70,7 +72,17 @@ app.getMovieData = function(genreId,results){
 			sort_by: 'popularity.desc',
 			page: 1
 		}
-	}).then(function(){});
+	}).then(function(res){
+		console.log(res);
+		let movieArray = res.results; 
+		for (var i = 0; i < movieArray.length; i++){
+		console.log(movieArray[i].poster_path);
+		let posterPathJpg = movieArray[i].poster_path
+		var posterPath = `https://image.tmdb.org/t/p/w500${posterPathJpg}`;
+		console.log(posterPath); 
+		app.display(posterPath);
+		}
+	});
 };
 
 app.getYumId = function(genreName){
@@ -153,8 +165,10 @@ app.getYumRecipe = function (recipeId) {
 
 // display function
 
-app.display = function(){
-
+app.display = function(posterPath){
+	let movieImgEl = $('<img>').addClass("movieImage");
+	movieImgEl.attr('src', posterPath);
+	$("#dynamicContent").append(movieImgEl);
 };
 
 //Renders the circle nav in containing the genres
@@ -170,6 +184,7 @@ app.init = function(){
 	app.renderMenu();
 	app.getUserGenre();
 	app.events();
+	
 };
 
 // doc ready
