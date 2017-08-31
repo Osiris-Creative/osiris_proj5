@@ -8,10 +8,10 @@ app.movieKey = 'dc85e0389c4e0355687d4c1bf7e0d2c1';
 
 // events handling
 app.events = function(genrePicked){
-	console.log(genrePicked)
+	var menuGenre = genrePicked;
 	$("form").on('submit',function (e) {
 		e.preventDefault();
-		let userGenre = $('#genreChoice').val();
+		let userGenre = menuGenre;
 		// console.log(userGenre)
 		let userDecade = parseInt($('#decadeChoice').val());
 		let userSelection = {
@@ -19,7 +19,6 @@ app.events = function(genrePicked){
 			userDecade: userDecade
 		}
 		app.getGenre(userSelection);
-		console.log(userDecade);
 	});
 
 }
@@ -42,6 +41,7 @@ app.getGenre = function (results){
 		let genreIndex = genreList.findIndex(function(el){
 			return el.name === results.userGenre;
 		});
+		console.log(genreIndex)
 		let genreId = genreList[genreIndex].id
 		console.log(genreId);
 		let genreName = genreList[genreIndex].name
@@ -114,8 +114,13 @@ app.getYumId = function(genreName){
 		}
 	}).then(function(res){
 		let recipeArr = res.matches;
+		let recipeIdList = [];
+		for (let i = 0; i < recipeArr.length; i++) {
+			recipeIdList.push(recipeArr[i].id);
+		}
+		console.log(recipeIdList);
 	});
-	app.getYumRecipe(recipeId)
+	// app.getYumRecipe(recipeId)
 };
 
 app.getYumRecipe = function (recipeId) {
@@ -160,7 +165,7 @@ app.renderMenu = function() {
 // make init function
 app.init = function(){
 	app.renderMenu();
-	app.events();
+	// app.events();
 };
 
 // doc ready
