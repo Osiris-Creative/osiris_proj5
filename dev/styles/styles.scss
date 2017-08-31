@@ -36,6 +36,46 @@ svg {
 	transform: translate( -50%, -50%)
 }
 
+.mobile {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	display: none;
+}
+
+.mobile__menu--container {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.mobile__list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.mobile__list li {
+	float: left;
+	height: calc(100vh/4);
+	display: inline-block;
+	width: calc(100%/2);
+	padding: 4.5%;
+	background-color: $secondary-color;
+	cursor: pointer;
+	color: #fff;
+	&:hover {
+		background-color: $lightgray;
+	}
+}
+
+.decade__selector--mobile {
+	text-align: center;
+	height: 10vh;
+}
+
+.decade__selector--mobile p {
+	float: left;
+}
 
 #piemenu > svg { width: 100%; height: 100%; }
 #piemenu { height: 900px; width: 900px; margin:auto; }
@@ -51,3 +91,9 @@ svg {
 [class|=wheelnav-piemenu-title] > tspan { font-family: "Oswald", sans-serif; font-size: 22px; fill: #fff;}
 
 .wheelnav-piemenu-marker { stroke: #f6c417; stroke-width: 2; }
+
+@media (max-width: 790px) {
+	.mobile {
+		display: block;
+	}
+}
