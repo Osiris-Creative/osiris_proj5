@@ -7,11 +7,14 @@ app.yumId = 'fa8d9918';
 app.movieKey = 'dc85e0389c4e0355687d4c1bf7e0d2c1';
 
 
-app.getUserGenre = (genrePicked) => {
-
-	console.log(genrePicked)
-	app.genrePicked = genrePicked;
-}
+app.getUserGenre = function(genrePicked){
+	// Could not add space to parameter in the wheel that worked
+	if (genrePicked === "Science") {
+		app.genrePicked = "Science Fiction";
+	} else {
+		app.genrePicked = genrePicked;
+	}
+}	
 // events handling
 app.events = function(genrePicked){
 	// console.log(genrePicked)
@@ -154,6 +157,8 @@ app.getYumRecipe = function (recipeId) {
 // display function
 
 app.display = function(){
+
+	
 
 };
 
