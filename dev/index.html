@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>html</title>
 	<link rel="stylesheet" href="styles/styles.css">
+	<link href="https://fonts.googleapis.com/css?family=Oswald:400,500|Roboto:300,400" rel="stylesheet">
 </head>
 <body>
 	<form id="movieForm">
@@ -21,9 +22,29 @@
 			<option value="2010s">2010s</option>
 		</select>
 		<input type="submit">
-			
 	</form>
+
+	<section>
+		<div id='piemenu' data-wheelnav
+		 data-wheelnav-slicepath='DonutSlice'
+		 data-wheelnav-marker data-wheelnav-markerpath='PieLineMarker'
+		 data-wheelnav-rotateoff
+		 data-wheelnav-navangle='270'
+		 data-wheelnav-cssmode 
+		 data-wheelnav-init>
+		 	<div data-wheelnav-navitemtext="Action"></div>
+		    <div data-wheelnav-navitemtext="Drama"></div>
+		    <div data-wheelnav-navitemtext="Comedy"></div>
+		    <div data-wheelnav-navitemtext="Fantasy"></div>
+		    <div data-wheelnav-navitemtext="Horror"></div>
+		    <div data-wheelnav-navitemtext="Music"></div>
+		    <div data-wheelnav-navitemtext="Romance"></div>
+		    <div data-wheelnav-navitemtext="Science Fiction"></div>
+	</section>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="scripts/raphael.min.js"></script>
+	<script src="scripts/raphael.icons.min.js"></script>
+	<script src="scripts/wheelnav.min.js"></script>
 	<script src="scripts/scripts.js"></script>
 </body>
 </html>

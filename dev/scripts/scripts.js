@@ -130,8 +130,17 @@ app.display = function(){
 
 };
 
+
+app.renderMenu = function() {
+	var piemenu = new wheelnav('piemenu');
+	piemenu.clockwise = false;
+	piemenu.wheelRadius = piemenu.wheelRadius * 0.83;
+	piemenu.createWheel();
+}
+
 // make init function
 app.init = function(){
+	app.renderMenu();
 	app.events();
 };
 
