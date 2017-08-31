@@ -133,9 +133,8 @@ app.getYumId = function(genreName){
 		for (let i = 0; i < recipeArr.length; i++) {
 			recipeIdList.push(recipeArr[i].id);
 		}
-		console.log(recipeIdList);
+		var recipeCalls = recipeIdList.map(app.getYumRecipe);
 	});
-	// app.getYumRecipe(recipeId)
 };
 
 app.getYumRecipe = function (recipeId) {
@@ -148,13 +147,12 @@ app.getYumRecipe = function (recipeId) {
 			_app_key: app.yumKey
 		}
 	}).then(function(res){
-		console.log(res)
+		var recipeName = res.name;
+		var recipeUrl = res.source.sourceRecipeUrl;
+		var recipeImg = res.images[0].imageUrlsBySize["360"];
+		
 	});
 };
-
-
-
-
 
 
 //parse data function
