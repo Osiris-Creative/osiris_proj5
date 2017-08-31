@@ -42,14 +42,11 @@ app.getGenre = function (results){
 			api_key: app.movieKey,
 		}
 	}).then(function(res){
-		console.log(res)
 		let genreList = res.genres
 		let genreIndex = genreList.findIndex(function(el){
 			return el.name === results.userGenre;
 		});
-		console.log(genreIndex)
 		let genreId = genreList[genreIndex].id
-		console.log(genreId);
 		let genreName = genreList[genreIndex].name
 		app.getMovieData(genreId, results);
 		app.getYumId(genreName);
@@ -76,14 +73,11 @@ app.getMovieData = function(genreId,results){
 			page: 1
 		}
 	}).then(function(res){
-		console.log(res);
 		let movieArray = res.results; 
 		for (var i = 0; i < movieArray.length; i++){
-		console.log(movieArray[i].poster_path);
 		let posterPathJpg = movieArray[i].poster_path
 		var posterPath = `https://image.tmdb.org/t/p/w500${posterPathJpg}`;
-		console.log(posterPath); 
-		app.display(posterPath);
+		app.displayMovie(posterPath);
 		}
 	});
 };
@@ -150,29 +144,29 @@ app.getYumRecipe = function (recipeId) {
 			_app_key: app.yumKey
 		}
 	}).then(function(res){
-		var recipeName = res.name;
-		var recipeUrl = res.source.sourceRecipeUrl;
-		var recipeImg = res.images[0].imageUrlsBySize["360"];
-		
+		let recipeName = res.name;
+		let recipeUrl = res.source.sourceRecipeUrl;
+		let recipeImg = res.images[0].imageUrlsBySize['360'];
+		app.displayRecipe(recipeName, recipeUrl, recipeImg);
 	});
 };
 
-
-//parse data function
-// app.parseData = function(genreName, results){
-// 	if(genreName === )
-// };
-
-
-// display function
-
-
-app.display = function(posterPath){
-	let movieImgEl = $('<img>').addClass("movieImage");
-	movieImgEl.attr('src', posterPath);
-	$("#dynamicContent").append(movieImgEl);
+//function to display recipes to page 
+app.displayRecipe = function(recipeName, recipeUrl, recipeImg){
+	let recipeImgEl = $('<img>').addClass('recipeImage');
+		recipeImgEl.attr('src', recipeImg);
+	// let recipeLink = .append(`<a>${recipeName}</a>`);
+		// recipeLink.attr('href', recipeUrl);
+	// $('#dynamicContent').append(recipeImgEl)
 }
 
+//function to display movies to page
+
+app.displayMovie = function(posterPath){
+	let movieImgEl = $('<img>').addClass('movieImage');
+	movieImgEl.attr('src', posterPath);
+	$('#dynamicContent').append(movieImgEl);
+}
 
 //Renders the circle nav in containing the genres
 app.renderMenu = function() {
