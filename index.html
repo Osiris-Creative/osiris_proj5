@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>html</title>
-	<link rel="stylesheet" href="styles/styles.css">
+	<link rel="stylesheet" href="public/styles/styles.css">
 	<link href="https://fonts.googleapis.com/css?family=Oswald:400,500|Roboto:300,400" rel="stylesheet">
 </head>
 <body>
@@ -58,13 +58,8 @@
 				<br>
 				<input type="submit">
 			</form>
-			<div id="dynamicContent">
-				<!-- dynamic content goes here -->
-			</div>
-			
 		</div>
 	</section>
-
 	<section class="mobile">
 		<div class="decade__selector--mobile clearfix">
 			<p>Choose a decade</p>
@@ -95,10 +90,16 @@
 			</ul>
 		</div>
 	</section>
+	<section>
+		<div id="dynamicContent">
+			<!-- dynamic content goes here -->
+		</div>
+		<div id="recipeDivs"></div>
+	</section>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="scripts/raphael.min.js"></script>
-	<script src="scripts/wheelnav.min.js"></script>
-	<script src="scripts/scripts.js"></script>
+	<script src="public/scripts/raphael.min.js"></script>
+	<script src="public/scripts/wheelnav.min.js"></script>
+	<script src="public/scripts/scripts.js"></script>
 </body>
 </html>

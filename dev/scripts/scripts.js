@@ -77,13 +77,14 @@ app.getMovieData = function(genreId,results){
 		}
 	}).then(function(res){
 		console.log(res);
+		//Clear movie list
+		$("#dynamicContent").empty();
 		let movieArray = res.results; 
 		for (var i = 0; i < movieArray.length; i++){
 		console.log(movieArray[i].poster_path);
 		let posterPathJpg = movieArray[i].poster_path
 		var posterPath = `https://image.tmdb.org/t/p/w500${posterPathJpg}`;
-		console.log(posterPath); 
-		app.display(posterPath);
+		app.displayMovie(posterPath);
 		}
 	});
 };
@@ -167,10 +168,11 @@ app.getYumRecipe = function (recipeId) {
 // display function
 
 
-app.display = function(posterPath){
-	let movieImgEl = $('<img>').addClass("movieImage");
-	movieImgEl.attr('src', posterPath);
-	$("#dynamicContent").append(movieImgEl);
+app.displayMovie = function(posterPath){
+	let movieImgEl = $('<img>').addClass("movieImage").attr('src', posterPath);
+	let movieOverlay = $("<div>").addClass("movie__overlay");
+	let movieContainer = $("<div>").addClass("movie__container").append(movieOverlay, movieImgEl);
+	$("#dynamicContent").append(movieContainer);
 }
 
 
