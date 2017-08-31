@@ -1,0 +1,23 @@
+header{
+	height:100vh;
+	position: relative;
+	background: $lightgray;
+	.logoContainer {
+		position: absolute;
+		left:50%;
+		transform: translateX(-50%);
+	}
+	img{
+		height:100px;
+		width:100px;
+		float:left;
+		display: inline-block;
+	}
+	h1{
+		font-size: 100px;
+		font-family:'Oswald', sans-serif;
+		color:$secondary-color;
+		float:left;
+		display: inline-block;
+	}
+}
