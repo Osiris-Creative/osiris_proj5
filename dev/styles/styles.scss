@@ -32,7 +32,7 @@ svg {
 .decade__selector {
 	position: absolute;
 	left: 50%;
-	top: 58%;
+	top: 50%;
 	transform: translate( -50%, -50%)
 }
 
@@ -42,7 +42,7 @@ svg {
 @media (max-width: 400px) { #piemenu { height: 300px; width: 300px; } }
 
 [class|=wheelnav-piemenu-slice-basic] { fill: $secondary-color; stroke: none; }
-[class|=wheelnav-piemenu-slice-selected] { fill: $secondary-color; stroke: none; }
+[class|=wheelnav-piemenu-slice-selected] { fill: $lightgray; stroke: none; }
 [class|=wheelnav-piemenu-slice-hover] { fill: $secondary-color;  stroke: none; fill-opacity: 0.77; cursor: pointer; }
 
 [class|=wheelnav-piemenu-title-basic] { fill: #333; stroke: none; }

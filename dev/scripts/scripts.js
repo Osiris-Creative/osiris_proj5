@@ -6,29 +6,31 @@ app.yumKey = 'bf6ff579ddf44506f1a5ba19a2eb465a';
 app.yumId = 'fa8d9918';
 app.movieKey = 'dc85e0389c4e0355687d4c1bf7e0d2c1';
 
+
+app.getUserGenre = (genrePicked) => {
+
+	console.log(genrePicked)
+	app.genrePicked = genrePicked;
+}
 // events handling
 app.events = function(genrePicked){
-	console.log(genrePicked)
+	// console.log(genrePicked)
 	$("form").on('submit',function (e) {
 		e.preventDefault();
-		let userGenre = $('#genreChoice').val();
-		// console.log(userGenre)
-		let userDecade = parseInt($('#decadeChoice').val());
+		app.userDecade = parseInt($('#decadeChoice').val());
 		let userSelection = {
-			userGenre: userGenre,
-			userDecade: userDecade
+			userGenre: app.genrePicked,
+			userDecade: app.userDecade
 		}
 		app.getGenre(userSelection);
-		console.log(userDecade);
 	});
-
 }
 
 
 // get data function
 
 app.getGenre = function (results){
-	console.log(results)
+	// console.log(results)
 	let movieCallOne = $.ajax({
 		url: 'https://api.themoviedb.org/3/genre/movie/list',
 		method: 'GET',
@@ -42,6 +44,7 @@ app.getGenre = function (results){
 		let genreIndex = genreList.findIndex(function(el){
 			return el.name === results.userGenre;
 		});
+		console.log(genreIndex)
 		let genreId = genreList[genreIndex].id
 		console.log(genreId);
 		let genreName = genreList[genreIndex].name
@@ -114,8 +117,13 @@ app.getYumId = function(genreName){
 		}
 	}).then(function(res){
 		let recipeArr = res.matches;
+		let recipeIdList = [];
+		for (let i = 0; i < recipeArr.length; i++) {
+			recipeIdList.push(recipeArr[i].id);
+		}
+		console.log(recipeIdList);
 	});
-	app.getYumRecipe(recipeId)
+	// app.getYumRecipe(recipeId)
 };
 
 app.getYumRecipe = function (recipeId) {
@@ -160,6 +168,7 @@ app.renderMenu = function() {
 // make init function
 app.init = function(){
 	app.renderMenu();
+	app.getUserGenre();
 	app.events();
 };
 
