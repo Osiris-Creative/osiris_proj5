@@ -7,7 +7,8 @@ app.yumId = 'fa8d9918';
 app.movieKey = 'dc85e0389c4e0355687d4c1bf7e0d2c1';
 
 // events handling
-app.events = function(){
+app.events = function(genrePicked){
+	console.log(genrePicked)
 	$("form").on('submit',function (e) {
 		e.preventDefault();
 		let userGenre = $('#genreChoice').val();
@@ -20,6 +21,7 @@ app.events = function(){
 		app.getGenre(userSelection);
 		console.log(userDecade);
 	});
+
 }
 
 
@@ -147,8 +149,17 @@ app.display = function(){
 
 };
 
+//Renders the circle nav in containing the genres
+app.renderMenu = function() {
+	var piemenu = new wheelnav('piemenu');
+	piemenu.clockwise = false;
+	piemenu.wheelRadius = piemenu.wheelRadius * 0.83;
+	piemenu.createWheel();
+}
+
 // make init function
 app.init = function(){
+	app.renderMenu();
 	app.events();
 };
 
