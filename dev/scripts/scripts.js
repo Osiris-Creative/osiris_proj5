@@ -73,6 +73,9 @@ app.getMovieData = function(genreId,results){
 			page: 1
 		}
 	}).then(function(res){
+		console.log(res);
+		//Clear movie list
+		$("#dynamicContent").empty();
 		let movieArray = res.results; 
 		for (var i = 0; i < movieArray.length; i++){
 		let posterPathJpg = movieArray[i].poster_path
@@ -163,6 +166,11 @@ app.displayRecipe = function(recipeName, recipeUrl, recipeImg){
 //function to display movies to page
 
 app.displayMovie = function(posterPath){
+
+	let movieImgEl = $('<img>').addClass("movieImage").attr('src', posterPath);
+	let movieOverlay = $("<div>").addClass("movie__overlay");
+	let movieContainer = $("<div>").addClass("movie__container").append(movieOverlay, movieImgEl);
+	$("#dynamicContent").append(movieContainer);
 	let movieImgEl = $('<img>').addClass('movieImage');
 	movieImgEl.attr('src', posterPath);
 	$('#dynamicContent').append(movieImgEl);
