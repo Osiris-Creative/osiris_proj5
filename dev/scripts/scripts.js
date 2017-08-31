@@ -73,12 +73,9 @@ app.getMovieData = function(genreId,results){
 			page: 1
 		}
 	}).then(function(res){
-<<<<<<< HEAD
 		console.log(res);
 		//Clear movie list
 		$("#dynamicContent").empty();
-=======
->>>>>>> 751fbf76f2b8ed7003b392b4f844b58046c3945a
 		let movieArray = res.results; 
 		for (var i = 0; i < movieArray.length; i++){
 		let posterPathJpg = movieArray[i].poster_path
