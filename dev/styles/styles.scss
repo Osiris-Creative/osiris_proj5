@@ -17,16 +17,28 @@ html, body {
 	height: 100%;
 	width: 100%;
 	background-color: papayawhip;
+	// font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 
 section {
 	height: 100%;
 }
 
+svg {
+	position: relative;
+}
+
+.decade__selector {
+	position: absolute;
+	left: 50%;
+	top: 58%;
+	transform: translate( -50%, -50%)
+}
 
 
 #piemenu > svg { width: 100%; height: 100%; }
-#piemenu { height: 800px; width: 800px; margin:auto; }
+#piemenu { height: 900px; width: 900px; margin:auto; }
 @media (max-width: 400px) { #piemenu { height: 300px; width: 300px; } }
 
 [class|=wheelnav-piemenu-slice-basic] { fill: $secondary-color; stroke: none; }
@@ -36,6 +48,6 @@ section {
 [class|=wheelnav-piemenu-title-basic] { fill: #333; stroke: none; }
 [class|=wheelnav-piemenu-title-selected] { fill: #222; stroke: none; }
 [class|=wheelnav-piemenu-title-hover] { fill: #222; stroke: none; cursor: pointer; }
-[class|=wheelnav-piemenu-title] > tspan { font-family: Impact, Charcoal, sans-serif; font-size: 20px; fill: #fff;}
+[class|=wheelnav-piemenu-title] > tspan { font-family: "Oswald", sans-serif; font-size: 22px; fill: #fff;}
 
 .wheelnav-piemenu-marker { stroke: #f6c417; stroke-width: 2; }
