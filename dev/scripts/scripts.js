@@ -171,9 +171,6 @@ app.displayMovie = function(posterPath){
 	let movieOverlay = $("<div>").addClass("movie__overlay");
 	let movieContainer = $("<div>").addClass("movie__container").append(movieOverlay, movieImgEl);
 	$("#dynamicContent").append(movieContainer);
-	let movieImgEl = $('<img>').addClass('movieImage');
-	movieImgEl.attr('src', posterPath);
-	$('#dynamicContent').append(movieImgEl);
 }
 
 //Renders the circle nav in containing the genres
