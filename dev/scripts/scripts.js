@@ -80,9 +80,11 @@ app.getMovieData = function(genreId,results){
 		let movieArray = res.results; 
 		for (var i = 0; i < 4; i++){
 		let posterPathJpg = movieArray[i].poster_path
-		let movieDescription = movieArray[i].name;
+		let movieDescription = movieArray[i].title;
 		var posterPath = `https://image.tmdb.org/t/p/w500${posterPathJpg}`;
-		app.displayMovie(posterPath, movieDescription);
+		let movieId = movieArray[i].id;
+		let movieSum = movieArray[i].overview;
+		app.displayMovie(posterPath, movieDescription, movieId, movieSum);
 		}
 	});
 };
@@ -160,7 +162,37 @@ app.getYumRecipe = function (recipeId) {
 };
 
 app.getMovieDetails = function () {
+	$("#dynamicContent").on('click', ".movie__container",function(){
+		let movieId = $(this).data("id");
+		app.getMovieBackdrop(movieId);
+		$(".movie__container").css("width", "0%");
+		$(this).css("width", "100%");
+		$("h2", this).css({
+		    'opacity' : '1',
+		});
+		$("p", this).css({
+			'opacity' : '1',
+		})
+	});
 
+	$(".movie__gallery--overlay").on('click', function(){
+		$(".movie__container").css("width", `calc((100%/4) - 2%)`);
+		$(".movie__info--container h2 , .movie__info--container p").css("opacity", "0");
+	})
+}
+
+app.getMovieBackdrop = function (movieId) {
+	$.ajax({
+		url: `https://api.themoviedb.org/3/movie/${movieId}/images`,
+		method: "GET",
+		dataType: "json",
+		data: {
+			api_key: app.movieKey,
+		 }
+	}).then(function(res){
+		let backDropUrl = `https://image.tmdb.org/t/p/original${res.backdrops[0].file_path}`;
+		$(".movie__gallery").css("background-image", `url(${backDropUrl})`);
+	})
 }
 
 //function to display recipes to page 
@@ -174,11 +206,15 @@ app.displayRecipe = function(recipeName, recipeUrl, recipeImg){
 
 //function to display movies to page
 
-app.displayMovie = function(posterPath, movieDescription){
-	let movieDescrip = $("<p>").addClass("movie__descrip").append(movieDescription)
+app.displayMovie = function(posterPath, movieDescription, movieId, movieSum){
+	// console.log(movieDescription)
+	let movieDescrip = $("<h2>").addClass("movie__descrip").append(movieDescription);
+	let movieSummary = $("<p>").addClass("movie__summary").append(movieSum);
+	let movieInfoContainer = $("<div>").addClass("movie__info--container").append(movieDescrip, movieSummary);
 	let movieImgEl = $('<img>').addClass("movieImage").attr('src', posterPath);
 	let movieOverlay = $("<div>").addClass("movie__overlay");
-	let movieContainer = $("<div>").addClass("movie__container").append(movieOverlay, movieImgEl, movieDescrip);
+	//Added data-moveId to html data attribute so when clicked can call for backdrop image.
+	let movieContainer = $("<div>").attr("data-id", movieId).addClass("movie__container").append(movieOverlay, movieImgEl, movieInfoContainer);
 	$("#dynamicContent").append(movieContainer);
 }
 
@@ -187,7 +223,7 @@ app.renderMenu = function() {
 	var piemenu = new wheelnav('piemenu');
 	piemenu.clockwise = false;
 	piemenu.sliceInitPathFunction = piemenu.slicePathFunction;
-	piemenu.initPercent = 0.1;
+	piemenu.initPercent = 0.2;
 	piemenu.wheelRadius = piemenu.wheelRadius * 0.83;
 	piemenu.createWheel();
 }
@@ -197,7 +233,7 @@ app.init = function(){
 	app.renderMenu();
 	app.getUserGenre();
 	app.events();
-	
+	app.getMovieDetails();
 };
 
 // doc ready
