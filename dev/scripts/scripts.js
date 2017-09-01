@@ -132,8 +132,7 @@ app.getYumId = function(genreName){
 			format: 'json'
 		}
 	}).then(function(res){
-		console.log(res);
-		$(".recipeContainer").remove();
+		$('.recipe__card__wrapper').remove();
 		let recipeArr = res.matches;
 		let recipeIdList = [];
 		for (let i = 0; i < 4; i++) {
@@ -155,17 +154,14 @@ app.getYumRecipe = function (recipeId) {
 	}).then(function(res){
 		let recipeName = res.name;
 		let recipeNameLength = recipeName.length;
-		console.log(recipeNameLength);
 		if (recipeNameLength > 35) {
 			recipeName = `${recipeName.substring(0, 34)}...`;
 		};
-		console.log(recipeName);
 		let recipeUrl = res.source.sourceRecipeUrl;
 		let recipeImg = res.images[0].imageUrlsBySize['360'];
 		let recipeServings = res.numberOfServings;
 		let recipeLgthTime = res.totalTime;
 		app.displayRecipe(recipeName, recipeUrl, recipeImg, recipeServings, recipeLgthTime);
-		console.log(res);
 	});
 };
 
@@ -208,14 +204,12 @@ app.displayRecipe = function(recipeName, recipeUrl, recipeImg, recipeServings, r
 	let recipeImgEl = $('<img>').addClass("recipe__img").attr('src', recipeImg);
 	let recipeTitle = $('<h2>').addClass("recipe__title").append(recipeName);
 	let recipeOverlay = $('<div>').addClass("recipe__overlay");
-	let recipeLink = $('<a>').attr('href', recipeUrl);
-	let recipeImage = $('<div>').addClass("recipe__image__wrapper").append(recipeOverlay, recipeImgEl, recipeTitle);
-	// a tag to append to recipe image wrapper
-	$('#recipe__div').append(recipeImage);
-	// let recipeServ = $('<p>').addClass("recipe__servings").append(`Servings: ${recipeServings}`);
-	// let recipeTime = $('<p>').addClass("recipe__time").append(`Total Time: ${recipeLgthTime}`);
-	// let recipeContainer = $("<div>").addClass("recipe__container").append(recipeImgEl,recipeTitle,recipeServ,recipeTime);
-	// $('#recipeDiv').append(recipeContainer);
+	let recipeServ = $('<p>').addClass("recipe__servings").append(`Servings: ${recipeServings}`);
+	let recipeTime = $('<p>').addClass("recipe__time").append(`Total Time: ${recipeLgthTime}`);
+	let recipeInfo = $('<div>').addClass("recipe__info").append(recipeServ, recipeTime);
+	let recipeImage = $('<div>').addClass("recipe__card__wrapper").append(recipeOverlay, recipeImgEl, recipeTitle, recipeInfo);
+	let recipeCard = $('<a>').attr('href', recipeUrl).attr('target', '_blank').append(recipeImage);
+	$('#recipe__div').append(recipeCard);
 }
 
 //function to display movies to page
