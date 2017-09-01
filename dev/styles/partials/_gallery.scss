@@ -4,10 +4,15 @@
 
 .movie__container {
 	display: inline-block;
-	width: calc((100%/4) - 4%);
-	margin: 2%;
+	width: calc((100%/4) - 2%);
+	margin: 1%;
 	font-size: 0;
 	position: relative;
+	transition: all 0.2s ease-in;
+	&:hover {
+		transform: scale(1.01);
+	}
+	cursor: pointer;
 }
 
 .movie__overlay {
@@ -17,13 +22,15 @@
 	right: 0;
 	bottom: 0;
 	display: inline-block;
-	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%,
-        rgba(0,0,0, 0.6) 50%,
-        rgba(0,0,0, 0.6) 60%,
-        rgba(0,0,0,0.6) 70%,
-		rgba(0,0,0,0.8) 75%);
 	font-size: 0;
 	z-index: 200;
+	box-shadow: 4px 4px 4px rgba(0,0,0,0.18);
+	background:  linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.3)
+    );
+
 }
 
 .movieImage {
@@ -31,3 +38,12 @@
 	max-width: 100%;
 }
 
+.movie__descrip {
+	position: absolute;
+	z-index: 100;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 15px;
+	color: #fff;
+}
