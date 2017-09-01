@@ -19,16 +19,10 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		text-align: center;
-		font-size: 1.3em;
-		letter-spacing: 2px;
+		font-size: 1.5em;
+		letter-spacing: 1px;
 		font-weight: 300;
-		color: $primary-color;
-		font-family: 'Oswald', sans-serif;
-	}
-	.recipe__info {
-	position: absolute;
-	display:inline-block;
-	visibility: hidden;
+		color: $lightgray;
 	}
 	.recipe__overlay {
 		position: absolute;
@@ -44,6 +38,11 @@
 	      rgba(0, 0, 0, 0.7),
 	      rgba(0, 0, 0, 0.9)
 	    );
+	}
+	.recipe__info {
+	position: absolute;
+	display:inline-block;
+	visibility: hidden;
 	}
 }
 
