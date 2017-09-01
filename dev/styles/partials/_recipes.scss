@@ -2,13 +2,29 @@
 	padding: 4%;
 }
 
+.recipesSection {
+	// height: 50vh;
+}
+
 .recipeContainer {
 	display: inline-block;
 	width: calc((100%/4) - 2%);
 	margin: 1%;
+	border: solid $primary-color 1px;
+	padding: 0.5%;
+	cursor: pointer;
+	// height: 100%;
 	img {
 		width: 100%;
 	}
+	p {
+		font-family: 'Roboto', sans-serif;
+		text-align: center;
+	}
+}
+
+.recipeContainer:hover {
+	transform: scale(1.01);
 }
 
 
