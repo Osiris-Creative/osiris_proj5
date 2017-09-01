@@ -68,6 +68,7 @@ app.getMovieData = function(genreId,results){
 		data: {
 			api_key: app.movieKey,
 			with_genres: genreId,
+			with_original_language: "en",
 			"primary_release_date.gte": decadeStart,
 			"primary_release_date.lte": decadeEnd,
 			sort_by: 'popularity.desc',

@@ -3,11 +3,12 @@
 }
 
 .movie__gallery {
-	height: 100vh;
+	height: 90%;
 	position: relative;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-color: $secondary-color;
+	font-family: "Roboto", sans-serif;
 }
 
 .movie__gallery--overlay {
