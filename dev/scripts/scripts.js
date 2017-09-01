@@ -78,14 +78,6 @@ app.getMovieData = function(genreId,results){
 		//Clear movie list
 		$("#dynamicContent").empty();
 		let movieArray = res.results; 
-		// for (var i = 0; i < movieArray.length; i++){
-		// 	let posterPathJpg = movieArray[i].poster_path
-		// 	let movieDescription = movieArray[i].title;
-		// 	let posterPath = `https://image.tmdb.org/t/p/w500${posterPathJpg}`;
-		// 	let movieId = movieArray[i].id;
-		// 	let movieSum = movieArray[i].overview;
-		// 	app.displayMovie(posterPath, movieDescription, movieId, movieSum);
-		// }
 		app.movieCarousel(movieArray)
 	});
 };
