@@ -17,6 +17,7 @@ app.getUserGenre = function(genrePicked){
 }	
 // events handling
 app.events = function(genrePicked){
+	app.genrePicked = "Action"
 	// console.log(genrePicked)
 	$("form").on('submit',function (e) {
 		e.preventDefault();
@@ -77,10 +78,11 @@ app.getMovieData = function(genreId,results){
 		//Clear movie list
 		$("#dynamicContent").empty();
 		let movieArray = res.results; 
-		for (var i = 0; i < movieArray.length; i++){
+		for (var i = 0; i < 4; i++){
 		let posterPathJpg = movieArray[i].poster_path
+		let movieDescription = movieArray[i].name;
 		var posterPath = `https://image.tmdb.org/t/p/w500${posterPathJpg}`;
-		app.displayMovie(posterPath);
+		app.displayMovie(posterPath, movieDescription);
 		}
 	});
 };
@@ -154,6 +156,10 @@ app.getYumRecipe = function (recipeId) {
 	});
 };
 
+app.getMovieDetails = function () {
+
+}
+
 //function to display recipes to page 
 app.displayRecipe = function(recipeName, recipeUrl, recipeImg){
 	let recipeImgEl = $('<img>').addClass('recipeImage');
@@ -165,11 +171,11 @@ app.displayRecipe = function(recipeName, recipeUrl, recipeImg){
 
 //function to display movies to page
 
-app.displayMovie = function(posterPath){
-
+app.displayMovie = function(posterPath, movieDescription){
+	let movieDescrip = $("<p>").addClass("movie__descrip").append(movieDescription)
 	let movieImgEl = $('<img>').addClass("movieImage").attr('src', posterPath);
 	let movieOverlay = $("<div>").addClass("movie__overlay");
-	let movieContainer = $("<div>").addClass("movie__container").append(movieOverlay, movieImgEl);
+	let movieContainer = $("<div>").addClass("movie__container").append(movieOverlay, movieImgEl, movieDescrip);
 	$("#dynamicContent").append(movieContainer);
 }
 
@@ -177,6 +183,8 @@ app.displayMovie = function(posterPath){
 app.renderMenu = function() {
 	var piemenu = new wheelnav('piemenu');
 	piemenu.clockwise = false;
+	piemenu.sliceInitPathFunction = piemenu.slicePathFunction;
+	piemenu.initPercent = 0.1;
 	piemenu.wheelRadius = piemenu.wheelRadius * 0.83;
 	piemenu.createWheel();
 }
