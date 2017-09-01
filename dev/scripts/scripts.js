@@ -97,7 +97,7 @@ app.getYumId = function(genreName){
 			keyWords = "fun party";
 			break;
 		case "Drama":
-			keyWords = "bitter";
+			keyWords = "exciting";
 			break;
 		case "Fantasy":
 			keyWords = "medieval";
@@ -112,7 +112,7 @@ app.getYumId = function(genreName){
 			keyWords = "love";
 			break;
 		case "Science Fiction":
-			keyWords = "brain";	
+			keyWords = "alien";	
 	}
 	$.ajax({
 		url:'http://api.yummly.com/v1/api/recipes',
@@ -130,9 +130,11 @@ app.getYumId = function(genreName){
 			format: 'json'
 		}
 	}).then(function(res){
+		console.log(res);
+		$(".recipeContainer").remove();
 		let recipeArr = res.matches;
 		let recipeIdList = [];
-		for (let i = 0; i < recipeArr.length; i++) {
+		for (let i = 0; i < 4; i++) {
 			recipeIdList.push(recipeArr[i].id);
 		}
 		var recipeCalls = recipeIdList.map(app.getYumRecipe);
@@ -164,8 +166,9 @@ app.getMovieDetails = function () {
 //function to display recipes to page 
 app.displayRecipe = function(recipeName, recipeUrl, recipeImg){
 	let recipeImgEl = $('<img>').addClass("recipeImage").attr('src', recipeImg);
-	// let recipeTitle = $('<p>'${recipeName}).addClass("recipeTitle")
-	let recipeContainer = $("<div>").addClass("recipeContainer").append(recipeImgEl);
+	let recipeTitle = $('<p>').addClass("recipeTitle").append(recipeName);
+	let recipeButton = $()
+	let recipeContainer = $("<div>").addClass("recipeContainer").append(recipeImgEl,recipeTitle);
 	$('#recipeDiv').append(recipeContainer);
 }
 
