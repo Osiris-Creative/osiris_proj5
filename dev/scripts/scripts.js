@@ -78,16 +78,37 @@ app.getMovieData = function(genreId,results){
 		//Clear movie list
 		$("#dynamicContent").empty();
 		let movieArray = res.results; 
-		for (var i = 0; i < 4; i++){
-		let posterPathJpg = movieArray[i].poster_path
-		let movieDescription = movieArray[i].title;
-		var posterPath = `https://image.tmdb.org/t/p/w500${posterPathJpg}`;
-		let movieId = movieArray[i].id;
-		let movieSum = movieArray[i].overview;
-		app.displayMovie(posterPath, movieDescription, movieId, movieSum);
-		}
+		app.movieCarousel(movieArray)
 	});
 };
+
+var count =  0;
+var upperLimit = 4;
+
+app.movieCarousel = function(movieArray) {
+		if (count >= 0 && count < 20) {
+			while(count < upperLimit) {
+				console.log(count)
+				let posterPathJpg = movieArray[count].poster_path
+				let movieDescription = movieArray[count].title;
+				var posterPath = `https://image.tmdb.org/t/p/w500${posterPathJpg}`;
+				let movieId = movieArray[count].id;
+				let movieSum = movieArray[count].overview;
+				app.displayMovie(posterPath, movieDescription, movieId, movieSum);
+				count++
+			}
+			if (upperLimit > 20) {
+				upperLimit -= 4
+			} else {
+				upperLimit = count + 4;
+			}
+		} else {
+			count = 0;
+			upperLimit = 4;
+			app.movieCarousel(movieArray);
+		} 
+	} 
+
 
 app.getYumId = function(genreName){
 	let keyWords;
@@ -166,9 +187,11 @@ app.getYumRecipe = function (recipeId) {
 };
 
 app.getMovieDetails = function () {
+
 	$("#dynamicContent").on('click', ".movie__container",function(){
 		let movieId = $(this).data("id");
 		app.getMovieBackdrop(movieId);
+		$(".movie__gallery--overlay").css("opacity","0.75")
 		$(".movie__container").css("width", "0%");
 		$(this).css("width", "100%");
 		$("h2", this).css({
@@ -221,7 +244,7 @@ app.displayMovie = function(posterPath, movieDescription, movieId, movieSum){
 	let movieInfoContainer = $("<div>").addClass("movie__info--container").append(movieDescrip, movieSummary);
 	let movieImgEl = $('<img>').addClass("movieImage").attr('src', posterPath);
 	let movieOverlay = $("<div>").addClass("movie__overlay");
-	//Added data-moveId to html data attribute so when clicked can call for backdrop image.
+	// Added data-moveId to html data attribute so when clicked can call for backdrop image.
 	let movieContainer = $("<div>").attr("data-id", movieId).addClass("movie__container").append(movieOverlay, movieImgEl, movieInfoContainer);
 	$("#dynamicContent").append(movieContainer);
 }

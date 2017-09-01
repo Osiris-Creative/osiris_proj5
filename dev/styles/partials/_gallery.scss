@@ -3,18 +3,11 @@
 }
 
 .movie__gallery {
-	height: 100%;
+	height: 100vh;
 	position: relative;
 	background-size: cover;
 	background-repeat: no-repeat;
-}
-
-.show__movie {
-	height: 100%;
-}
-
-.hide__movie {
-	height: 0;
+	background-color: $secondary-color;
 }
 
 .movie__gallery--overlay {
@@ -24,7 +17,7 @@
 	right: 0;
 	bottom: 0;
 	background-color: #000;
-	opacity: 0.75;
+	opacity: 0;
 }
 
 .movie__container {
