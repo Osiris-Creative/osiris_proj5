@@ -154,9 +154,17 @@ app.getYumRecipe = function (recipeId) {
 		}
 	}).then(function(res){
 		let recipeName = res.name;
+		let recipeNameLength = recipeName.length;
+		console.log(recipeNameLength);
+		if (recipeNameLength > 35) {
+			recipeName = `${recipeName.substring(0, 34)}...`;
+		};
+		console.log(recipeName);
 		let recipeUrl = res.source.sourceRecipeUrl;
 		let recipeImg = res.images[0].imageUrlsBySize['360'];
-		app.displayRecipe(recipeName, recipeUrl, recipeImg);
+		let recipeServings = res.numberOfServings;
+		let recipeLgthTime = res.totalTime;
+		app.displayRecipe(recipeName, recipeUrl, recipeImg, recipeServings, recipeLgthTime);
 		console.log(res);
 	});
 };
@@ -196,12 +204,18 @@ app.getMovieBackdrop = function (movieId) {
 }
 
 //function to display recipes to page 
-app.displayRecipe = function(recipeName, recipeUrl, recipeImg){
-	let recipeImgEl = $('<img>').addClass("recipeImage").attr('src', recipeImg);
-	let recipeTitle = $('<p>').addClass("recipeTitle").append(recipeName);
-	let recipeButton = $()
-	let recipeContainer = $("<div>").addClass("recipeContainer").append(recipeImgEl,recipeTitle);
-	$('#recipeDiv').append(recipeContainer);
+app.displayRecipe = function(recipeName, recipeUrl, recipeImg, recipeServings, recipeLgthTime){
+	let recipeImgEl = $('<img>').addClass("recipe__img").attr('src', recipeImg);
+	let recipeTitle = $('<h2>').addClass("recipe__title").append(recipeName);
+	let recipeOverlay = $('<div>').addClass("recipe__overlay");
+	let recipeLink = $('<a>').attr('href', recipeUrl);
+	let recipeImage = $('<div>').addClass("recipe__image__wrapper").append(recipeOverlay, recipeImgEl, recipeTitle);
+	// a tag to append to recipe image wrapper
+	$('#recipe__div').append(recipeImage);
+	// let recipeServ = $('<p>').addClass("recipe__servings").append(`Servings: ${recipeServings}`);
+	// let recipeTime = $('<p>').addClass("recipe__time").append(`Total Time: ${recipeLgthTime}`);
+	// let recipeContainer = $("<div>").addClass("recipe__container").append(recipeImgEl,recipeTitle,recipeServ,recipeTime);
+	// $('#recipeDiv').append(recipeContainer);
 }
 
 //function to display movies to page
