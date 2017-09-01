@@ -1,0 +1,14 @@
+#recipeDiv {
+	padding: 4%;
+}
+
+.recipeContainer {
+	display: inline-block;
+	width: calc((100%/4) - 2%);
+	margin: 1%;
+	img {
+		width: 100%;
+	}
+}
+
+

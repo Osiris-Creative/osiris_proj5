@@ -151,16 +151,16 @@ app.getYumRecipe = function (recipeId) {
 		let recipeUrl = res.source.sourceRecipeUrl;
 		let recipeImg = res.images[0].imageUrlsBySize['360'];
 		app.displayRecipe(recipeName, recipeUrl, recipeImg);
+		console.log(res);
 	});
 };
 
 //function to display recipes to page 
 app.displayRecipe = function(recipeName, recipeUrl, recipeImg){
-	let recipeImgEl = $('<img>').addClass('recipeImage');
-		recipeImgEl.attr('src', recipeImg);
-	// let recipeLink = .append(`<a>${recipeName}</a>`);
-		// recipeLink.attr('href', recipeUrl);
-	// $('#dynamicContent').append(recipeImgEl)
+	let recipeImgEl = $('<img>').addClass("recipeImage").attr('src', recipeImg);
+	// let recipeTitle = $('<p>'${recipeName}).addClass("recipeTitle")
+	let recipeContainer = $("<div>").addClass("recipeContainer").append(recipeImgEl);
+	$('#recipeDiv').append(recipeContainer);
 }
 
 //function to display movies to page
@@ -171,9 +171,6 @@ app.displayMovie = function(posterPath){
 	let movieOverlay = $("<div>").addClass("movie__overlay");
 	let movieContainer = $("<div>").addClass("movie__container").append(movieOverlay, movieImgEl);
 	$("#dynamicContent").append(movieContainer);
-	let movieImgEl = $('<img>').addClass('movieImage');
-	movieImgEl.attr('src', posterPath);
-	$('#dynamicContent').append(movieImgEl);
 }
 
 //Renders the circle nav in containing the genres
