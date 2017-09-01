@@ -1,22 +1,46 @@
-html, body {
-	height: 100%;
-	width: 100%;
-	background-color: papayawhip;
-	// font-family: 'Oswald', sans-serif;
-	font-family: 'Roboto', sans-serif;
-}
+//Pie nav section
 
 section {
 	height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+nav {
+	clear:both;
 }
 
 svg {
 	position: relative;
 }
 
-.userSelectionSection {
-	height: 100%;
+.userSelectionSection__header {
+	text-align: center;
+	color:$black;
+	padding-top: 30px;
 }
+.userSelectionSection {
+	height: 100vh;
+	// background: linear-gradient($secodary-two, $secondary-two), url(../../public/assets/theatre.jpg) no-repeat; 
+	// // background-image: url(../../public/assets/theatre.jpg);
+	// background-size: cover;
+	background: $lightgray;  /* fallback for old browsers */
+// background:linear-gradient(to right, $secondary-color, $black);
+
+	position: relative;
+		.overlay{
+		position: absolute;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+		width: 100%;
+		height: 100%;
+		// background-color: $black;
+		// mix-blend-mode:multiply;
+	}
+}
+
 
 .decade__selector {
 	position: absolute;
@@ -74,12 +98,12 @@ svg {
 #piemenu { height: 900px; width: 900px; margin:auto; }
 @media (max-width: 400px) { #piemenu { height: 300px; width: 300px; } }
 
-[class|=wheelnav-piemenu-slice-basic] { fill: $secondary-color; stroke: none; }
-[class|=wheelnav-piemenu-slice-selected] { fill: $lightgray; stroke: none; }
-[class|=wheelnav-piemenu-slice-hover] { fill: $secondary-color;  stroke: none; fill-opacity: 0.77; cursor: pointer; }
+[class|=wheelnav-piemenu-slice-basic] { fill: $black; stroke: none; }
+[class|=wheelnav-piemenu-slice-selected] { fill: $secondary-color; stroke: none; }
+[class|=wheelnav-piemenu-slice-hover] { fill: $secondary-color-two;  stroke: none; fill-opacity: 0.77; cursor: pointer; }
 
 [class|=wheelnav-piemenu-title-basic] { fill: #333; stroke: none; }
-[class|=wheelnav-piemenu-title-selected] { fill: #222; stroke: none; }
+[class|=wheelnav-piemenu-title-selected] { fill: $primary-color; stroke: none; }
 [class|=wheelnav-piemenu-title-hover] { fill: #222; stroke: none; cursor: pointer; }
 [class|=wheelnav-piemenu-title] > tspan { font-family: "Oswald", sans-serif; font-size: 22px; fill: #fff;}
 
@@ -91,8 +115,55 @@ svg {
 	}
 }
 
-// clearing float
+// Footer
 
-nav {
+footer{
+	background-color: $black;
 	clear:both;
+	p{
+		text-align:center;
+		color: $primary-color;
+		margin:0;
+		padding-top:40px;
+		padding-bottom: 40px;
+	}
+	.logo-footer__container{
+		float:left;
+		width:30%;
+	}
+	.logo-footer{
+		margin:0;
+		padding:0;
+		svg{
+			width:70px;
+			fill:$primary-color;
+			margin:0;
+			padding: 0;
+		}
+	}
+	.copyright{
+		width:40%;
+		float:left;
+	}
+	.apiCredit{
+		display: inline-block;
+		float:left;
+		width:30%;
+		p{
+			display:inline-block;
+			width:150px;
+			float:left;
+		}
+		}
+		.apiCredit__logo-yummly,
+		.apiCredit__logo-movieDb{
+		img{
+			width:100px;
+		}
+	}
+	..apiCredit__logo-yummly{
+		img {
+			padding-top: 15px;
+		}
+	}
 }
