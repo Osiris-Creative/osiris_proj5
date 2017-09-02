@@ -1,12 +1,11 @@
 // create an empty object
-
 const app = {};
 
 app.yumKey = 'bf6ff579ddf44506f1a5ba19a2eb465a';
 app.yumId = 'fa8d9918';
 app.movieKey = 'dc85e0389c4e0355687d4c1bf7e0d2c1';
 
-
+// get genre picked from user
 app.getUserGenre = function(genrePicked){
 	// Could not add space to parameter in the wheel that worked
 	if (genrePicked === "Science") {
@@ -15,10 +14,9 @@ app.getUserGenre = function(genrePicked){
 		app.genrePicked = genrePicked;
 	}
 }	
-// events handling
+// on form submit event handling
 app.events = function(genrePicked){
 	app.genrePicked = "Action"
-	// console.log(genrePicked)
 	$("form").on('submit',function (e) {
 		e.preventDefault();
 		app.userDecade = parseInt($('#decadeChoice').val());
@@ -30,11 +28,8 @@ app.events = function(genrePicked){
 	});
 }
 
-
-// get data function
-
+// ajax call for getting movie genre
 app.getGenre = function (results){
-	// console.log(results)
 	let movieCallOne = $.ajax({
 		url: 'https://api.themoviedb.org/3/genre/movie/list',
 		method: 'GET',
@@ -54,10 +49,8 @@ app.getGenre = function (results){
 	});
 };	
 
-
-
+// ajax call for getting movie decade 
 app.getMovieData = function(genreId,results){
-	// console.log(results)
 	let decadeStart = results.userDecade;
 	let decadeEnd = results.userDecade + 9;
 
@@ -74,7 +67,6 @@ app.getMovieData = function(genreId,results){
 			page: 1
 		}
 	}).then(function(res){
-		console.log(res);
 		//Clear movie list
 		$("#dynamicContent").empty();
 		let movieArray = res.results; 
@@ -82,6 +74,7 @@ app.getMovieData = function(genreId,results){
 	});
 };
 
+//setting up move carousel
 var count =  0;
 var upperLimit = 4;
 
@@ -109,7 +102,7 @@ app.movieCarousel = function(movieArray) {
 		} 
 	} 
 
-
+// ajax call for getting recipe ID based on user genre selection
 app.getYumId = function(genreName){
 	let keyWords;
 	switch(genreName){
@@ -163,6 +156,7 @@ app.getYumId = function(genreName){
 	});
 };
 
+//ajax call for getting recipe info 
 app.getYumRecipe = function (recipeId) {
 	$.ajax({
 		url: `http://api.yummly.com/v1/api/recipe/${recipeId}`,
@@ -175,8 +169,8 @@ app.getYumRecipe = function (recipeId) {
 	}).then(function(res){
 		let recipeName = res.name;
 		let recipeNameLength = recipeName.length;
-		if (recipeNameLength > 35) {
-			recipeName = `${recipeName.substring(0, 34)}...`;
+		if (recipeNameLength > 30) {
+			recipeName = `${recipeName.substring(0, 30)}...`;
 		};
 		let recipeUrl = res.source.sourceRecipeUrl;
 		let recipeImg = res.images[0].imageUrlsBySize['360'];
@@ -186,8 +180,8 @@ app.getYumRecipe = function (recipeId) {
 	});
 };
 
+//displaying movie details when user clicks on movie poster
 app.getMovieDetails = function () {
-
 	$("#dynamicContent").on('click', ".movie__container",function(){
 		let movieId = $(this).data("id");
 		app.getMovieBackdrop(movieId);
@@ -200,14 +194,25 @@ app.getMovieDetails = function () {
 		$("p", this).css({
 			'opacity' : '1',
 		})
+		$("div", this).css({
+			'opacity' : '1',
+		})
+		$("img", this).css({
+			'opacity' : '1',
+		})
+		$("a", this).css({
+			'opacity' : '1',
+		})
+		console.log(this);
 	});
 
 	$(".movie__gallery--overlay").on('click', function(){
 		$(".movie__container").css("width", `calc((100%/4) - 2%)`);
-		$(".movie__info--container h2 , .movie__info--container p").css("opacity", "0");
+		$(".movie__info--container h2 , .movie__info--container p, .movie__info--container a, .movie__info--container img, .movie__info--container div").css("opacity", "0");
 	})
 }
 
+//ajax call for movie background
 app.getMovieBackdrop = function (movieId) {
 	$.ajax({
 		url: `https://api.themoviedb.org/3/movie/${movieId}/images`,
@@ -222,7 +227,7 @@ app.getMovieBackdrop = function (movieId) {
 	})
 }
 
-//function to display recipes to page 
+//function to display recipe cards to page 
 app.displayRecipe = function(recipeName, recipeUrl, recipeImg, recipeServings, recipeLgthTime){
 	let recipeImgEl = $('<img>').addClass("recipe__img").attr('src', recipeImg);
 	let recipeTitle = $('<h2>').addClass("recipe__title").append(recipeName);
@@ -232,11 +237,10 @@ app.displayRecipe = function(recipeName, recipeUrl, recipeImg, recipeServings, r
 	let recipeInfo = $('<div>').addClass("recipe__info").append(recipeServ, recipeTime);
 	let recipeImage = $('<div>').addClass("recipe__card__wrapper").append(recipeOverlay, recipeImgEl, recipeTitle, recipeInfo);
 	let recipeCard = $('<a>').attr('href', recipeUrl).attr('target', '_blank').append(recipeImage);
-	$('#recipe__div').append(recipeCard);
+	$('.movie__info--container').append(recipeCard);
 }
 
 //function to display movies to page
-
 app.displayMovie = function(posterPath, movieDescription, movieId, movieSum){
 	// console.log(movieDescription)
 	let movieDescrip = $("<h2>").addClass("movie__descrip").append(movieDescription);
