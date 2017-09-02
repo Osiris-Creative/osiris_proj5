@@ -24,7 +24,6 @@
 	display: inline-block;
 	width: calc((100%/4) - 2%);
 	margin: 1%;
-	font-size: 0;
 	position: relative;
 	transition: all 0.15s ease-in;
 	&:hover {
@@ -59,9 +58,12 @@
 .movie__info--container {
 	position: absolute;
 	top: 50%;
-	right: 15%;
+	right: 10%;
 	transform: translateY(-50%);
-	width: 50%;
+	width: 60%;
+	a {
+		opacity: 0;
+	}
 }
 
 .movie__descrip {

@@ -1,4 +1,4 @@
-//Pie nav section
+//Pie nav section styling 
 
 section {
 	height: 100vh;
@@ -109,62 +109,13 @@ svg {
 
 .wheelnav-piemenu-marker { stroke: #f6c417; stroke-width: 2; }
 
+// responsive styling 
+
+//medium responsive styling 
 @media (max-width: 790px) {
 	.mobile {
 		display: block;
 	}
 }
 
-// Footer
-
-footer{
-	background-color: $black;
-	clear:both;
-	p{
-		text-align:center;
-		color: $primary-color;
-		margin:0;
-		padding-top:40px;
-		padding-bottom: 40px;
-	}
-	.logo-footer__container{
-		float:left;
-		width:30%;
-	}
-	.logo-footer{
-		margin:0;
-		padding:0;
-		svg{
-			width:70px;
-			fill:$primary-color;
-			margin:0;
-			padding: 0;
-		}
-	}
-	.copyright{
-		width:40%;
-		float:left;
-	}
-	.apiCredit{
-		display: inline-block;
-		float:left;
-		width:30%;
-		p{
-			display:inline-block;
-			width:150px;
-			float:left;
-		}
-		}
-		.apiCredit__logo-yummly,
-		.apiCredit__logo-movieDb{
-		img{
-			width:100px;
-		}
-	}
-	.apiCredit__logo-yummly{
-		img {
-			padding-top: 15px;
-		}
-	}
-}
 
