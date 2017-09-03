@@ -3,12 +3,15 @@
 }
 
 .movie__gallery {
-	height: 90%;
+	// height: 90%;
+	height: 0%;
+	overflow: hidden;
 	position: relative;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-color: $secondary-color;
 	font-family: "Roboto", sans-serif;
+	transition: all 0.5s ease-in;
 }
 
 .movie__gallery--overlay {
@@ -41,7 +44,7 @@
 	bottom: 0;
 	display: inline-block;
 	font-size: 0;
-	z-index: 200;
+	z-index: 100;
 	box-shadow: 4px 4px 4px rgba(0,0,0,0.18);
 	background:  linear-gradient(
       to bottom,
@@ -60,11 +63,16 @@
 	position: absolute;
 	top: 50%;
 	right: 5%;
+	margin: 1%;
+	z-index: 500;
 	transform: translateY(-50%);
 	width: 60%;
 	a {
 		opacity: 0;
 	}
+}
+
+.movie__info--container a {
 }
 
 .movie__descrip {

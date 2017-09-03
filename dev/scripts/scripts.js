@@ -24,6 +24,10 @@ app.events = function(genrePicked){
 			userGenre: app.genrePicked,
 			userDecade: app.userDecade
 		}
+		$(".movie__gallery").css("height" , "90%");
+		$("html, body").animate({
+			scrollTop: $(".movie__gallery").offset().top
+		}, 1000)
 		app.getGenre(userSelection);
 	});
 
@@ -183,7 +187,7 @@ app.getYumRecipe = function (recipeId) {
 };
 //Starts and stops detection of collision between elements when clicked out of movie selection
 app.collisionInterval = function(input) {
-	let collisionDetect = setInterval(app.elementCollide, 500);
+	let collisionDetect = setInterval(app.elementCollide, 300);
 	if (input !== false) {
 		collisionDetect;
 	} else {
@@ -202,7 +206,7 @@ app.getMovieDetails = function () {
 		$(".movie__container").css("width", "0%");
 		$(this).css("width", "100%");
 		$(".movie__info--container", this).addClass("inFocus")
-		$("img", this).addClass("inFocus2");
+		$(".movieImage", this).addClass("inFocus2");
 		$("*", this).css({
 		    'opacity' : '1',
 		});
@@ -223,6 +227,7 @@ app.getMovieDetails = function () {
 
 	$(".movie__gallery--overlay").on('click', function(){
 		app.collisionInterval(false);
+		$(".movieImage").css("opacity", "1");
 		$(".movie__info--container").removeClass("inFocus")
 		$(".movieImage").removeClass("inFocus2");
 
@@ -272,6 +277,7 @@ app.displayMovie = function(posterPath, movieDescription, movieId, movieSum){
 	$("#dynamicContent").append(movieContainer);
 }
 
+//Detects when two elements collide on page
 app.elementCollide = function() {
 
 	let element1 = $(".inFocus")
@@ -289,15 +295,15 @@ app.elementCollide = function() {
 	let element2FootPrint = coordX2 + coordX2outerWidth;
 
 
-	console.log("coordX1",coordX1,"fpx1", element1FootPrint)
-	console.log("coordX2",coordX2,"fpx2", element2FootPrint)
+	// console.log("coordX1",coordX1,"fpx1", element1FootPrint)
+	// console.log("coordX2",coordX2,"fpx2", element2FootPrint)
 
 	if ( element1FootPrint < coordX2 || coordX1 > element2FootPrint) {
-		console.log("no collision");
+		// console.log("no collision");
 		$(".movieImage").css("opacity", "1");
 	} else {
 		$(".movieImage").css("opacity", "0.25");
-		console.log("collision")
+		// console.log("collision")
 	}
   } catch (e) {
   	return;
