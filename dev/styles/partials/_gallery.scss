@@ -26,7 +26,7 @@
 	width: calc((100%/4) - 2%);
 	margin: 1%;
 	position: relative;
-	transition: all 0.15s ease-in;
+	overflow: hidden;
 	&:hover {
 		transform: scale(1.01);
 	}
@@ -59,7 +59,7 @@
 .movie__info--container {
 	position: absolute;
 	top: 50%;
-	right: 10%;
+	right: 5%;
 	transform: translateY(-50%);
 	width: 60%;
 	a {

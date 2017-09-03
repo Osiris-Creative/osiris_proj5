@@ -26,6 +26,7 @@ app.events = function(genrePicked){
 		}
 		app.getGenre(userSelection);
 	});
+
 }
 
 // ajax call for getting movie genre
@@ -180,34 +181,51 @@ app.getYumRecipe = function (recipeId) {
 		app.displayRecipe(recipeName, recipeUrl, recipeImg, recipeServings, recipeLgthTime);
 	});
 };
-
+//Starts and stops detection of collision between elements when clicked out of movie selection
+app.collisionInterval = function(input) {
+	let collisionDetect = setInterval(app.elementCollide, 500);
+	if (input !== false) {
+		collisionDetect;
+	} else {
+		clearInterval(collisionDetect);
+	}
+}
 //displaying movie details when user clicks on movie poster
 app.getMovieDetails = function () {
 	$("#dynamicContent").on('click', ".movie__container",function(){
+		app.collisionInterval();
 		let movieId = $(this).data("id");
 		app.getMovieBackdrop(movieId);
-		$(".movie__gallery--overlay").css("opacity","0.75")
+		$(".movie__info--container").removeClass("inFocus")
+		$(".movie__gallery--overlay").css("opacity","0.75");
+		$(".movieImage").removeClass("inFocus2");
 		$(".movie__container").css("width", "0%");
 		$(this).css("width", "100%");
-		$("h2", this).css({
+		$(".movie__info--container", this).addClass("inFocus")
+		$("img", this).addClass("inFocus2");
+		$("*", this).css({
 		    'opacity' : '1',
 		});
-		$("p", this).css({
-			'opacity' : '1',
-		})
-		$("div", this).css({
-			'opacity' : '1',
-		})
-		$("img", this).css({
-			'opacity' : '1',
-		})
-		$("a", this).css({
-			'opacity' : '1',
-		})
-		console.log(this);
+		// $("p", this).css({
+		// 	'opacity' : '1',
+		// })
+		// $("div", this).css({
+		// 	'opacity' : '1',
+		// })
+		// $("img", this).css({
+		// 	'opacity' : '1',
+		// })
+		// $("a", this).css({
+		// 	'opacity' : '1',
+		// })
+		// console.log(this);
 	});
 
 	$(".movie__gallery--overlay").on('click', function(){
+		app.collisionInterval(false);
+		$(".movie__info--container").removeClass("inFocus")
+		$(".movieImage").removeClass("inFocus2");
+
 		$(".movie__container").css("width", `calc((100%/4) - 2%)`);
 		$(".movie__info--container h2 , .movie__info--container p, .movie__info--container a, .movie__info--container img, .movie__info--container div").css("opacity", "0");
 	})
@@ -252,6 +270,39 @@ app.displayMovie = function(posterPath, movieDescription, movieId, movieSum){
 	// Added data-moveId to html data attribute so when clicked can call for backdrop image.
 	let movieContainer = $("<div>").attr("data-id", movieId).addClass("movie__container").append(movieOverlay, movieImgEl, movieInfoContainer);
 	$("#dynamicContent").append(movieContainer);
+}
+
+app.elementCollide = function() {
+
+	let element1 = $(".inFocus")
+	let element2 = $(".inFocus2");
+
+	try {
+	let coordX1 = element1.offset().left;
+	let coordX1outerWidth = element1.outerWidth(true);
+	// let coordY1 = element1.offset().top;
+	let coordX2 = element2.offset().left;
+	let coordX2outerWidth = element2.outerWidth(true);
+	// let coordY2 = element2.offset().top
+
+	let element1FootPrint = coordX1 + coordX1outerWidth;
+	let element2FootPrint = coordX2 + coordX2outerWidth;
+
+
+	console.log("coordX1",coordX1,"fpx1", element1FootPrint)
+	console.log("coordX2",coordX2,"fpx2", element2FootPrint)
+
+	if ( element1FootPrint < coordX2 || coordX1 > element2FootPrint) {
+		console.log("no collision");
+		$(".movieImage").css("opacity", "1");
+	} else {
+		$(".movieImage").css("opacity", "0.25");
+		console.log("collision")
+	}
+  } catch (e) {
+  	return;
+  }
+
 }
 
 //Renders the circle nav in containing the genres
