@@ -116,10 +116,10 @@ app.getYumId = function(genreName){
 			keyWords = "spicy";
 			break;
 		case "Comedy":
-			keyWords = "fun party";
+			keyWords = "funny";
 			break;
 		case "Drama":
-			keyWords = "exciting";
+			keyWords = "drama";
 			break;
 		case "Fantasy":
 			keyWords = "medieval";
@@ -131,27 +131,25 @@ app.getYumId = function(genreName){
 			keyWords = "soul";
 			break;
 		case "Romance":
-			keyWords = "love";
+			keyWords = "sweet love";
 			break;
 		case "Science Fiction":
 			keyWords = "alien";	
 	}
 	$.ajax({
-		url:'http://api.yummly.com/v1/api/recipes',
+		url:'http://api.yummly.com/v1/api/recipes?excludedCourse=course^course-Beverages&excludedCourse=course^course-Condiments and Sauces&excludedCourse=course^course-Cocktails&excludedCourse=course^course-Soup&excludedCourse=course^course-Breads',
 		method: 'GET',
 		dataType: 'json',
 		data:{
 			_app_id: app.yumId,
 			_app_key: app.yumKey,
-			requirePictures: true,
 			q: keyWords,
-			allowedCourse: "course^course-Snacks",
-			allowedCourse: "course^course-Desserts",
-			allowedCourse: "course^course-Appetizers",
-			maxResult: 20,
+			requirePictures: true,
+			// maxTotalTimeInSeconds: 2700
 			format: 'json'
 		}
 	}).then(function(res){
+		console.log(res);
 		$('.recipe__card__wrapper').remove();
 		let recipeArr = res.matches;
 		let recipeIdList = [];
@@ -327,6 +325,18 @@ app.init = function(){
 	app.getUserGenre();
 	app.events();
 	app.getMovieDetails();
+	// on page refresh, bring user to the top of the page
+	$(window).on('load', function(){
+		$('html, body').animate({
+			scrollTop: $('body').offset().top
+		}, 1000);
+	});
+	//on click of header bring user to wheel
+	$('.logoContainer').on('click', function() {
+		$('html, body').animate({
+			scrollTop: $('.userSelectionSection').offset().top
+		}, 1000);
+	});
 };
 
 // doc ready
