@@ -16,7 +16,10 @@ app.getUserGenre = function(genrePicked){
 }	
 // on form submit event handling
 app.events = function(genrePicked){
-	app.genrePicked = "Action"
+	app.genrePicked = "Action" //Default genre
+	$(".mobile__list li").on('click', function() {
+		app.genrePicked = $(this).text() ;
+	})
 	$("form").on('submit',function (e) {
 		e.preventDefault();
 		app.userDecade = parseInt($('#decadeChoice').val());

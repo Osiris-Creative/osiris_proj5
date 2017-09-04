@@ -59,7 +59,6 @@
 	display: inline-block;
 	font-size: 0;
 	z-index: 100;
-	box-shadow: 4px 4px 4px rgba(0,0,0,0.18);
 	background:  linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.1),
@@ -101,6 +100,7 @@
 }
 
 @media(max-width: 1000px) {
+
 	.movie__info--container {
 		width: 75%;
 	}
@@ -115,13 +115,16 @@
 		padding: 0;
 	}
 
+	.movie__gallery {
+		overflow: scroll;
+	}
+
 	.movie__info--container {
 		font-size: 0.8rem;
 		text-align: justify;
 		right: 0;
 		width: 100%;
 		padding: 2.5%;
-		overflow: scroll;
 	}
 
 	.movie__descrip {
