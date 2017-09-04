@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>SnackFlixs</title>
+	<title>SnackFlicks</title>
 	<link type="image/png" href="public/assets/fav.png" rel="icon">
 	<link rel="stylesheet" href="public/styles/styles.css"> 
 	<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500|Roboto:300,400" rel="stylesheet">
@@ -34,44 +34,48 @@
 		<h1>SnackFlicks</h1>
 	</div>
  	
-	<section class="userSelectionSection">
-		<div class="overlay"></div>
-		<h2 class="userSelectionSection__header">Choose Your Genre and Decade</h2>
-		<div class="circle__menu--container">
-			<div id='piemenu' data-wheelnav
-			 data-wheelnav-slicepath='DonutSlice'
-			 data-wheelnav-marker data-wheelnav-markerpath='PieLineMarker'
-			 data-wheelnav-rotateoff
-			 data-wheelnav-navangle='270'
-			 data-wheelnav-cssmode 
-			 data-wheelnav-init>
-			 	<div data-wheelnav-navitemtext="Action" data-genre="Action" onmouseup=app.getUserGenre("Action")></div>
-			    <div data-wheelnav-navitemtext="Drama" onmouseup=app.getUserGenre("Drama")></div>
-			    <div data-wheelnav-navitemtext="Comedy" onmouseup=app.getUserGenre("Comedy")></div>
-			    <div data-wheelnav-navitemtext="Fantasy" onmouseup=app.getUserGenre("Fantasy")></div>
-			    <div data-wheelnav-navitemtext="Horror" onmouseup=app.getUserGenre("Horror")></div>
-			    <div data-wheelnav-navitemtext="Music" onmouseup=app.getUserGenre("Music")></div>
-			    <div data-wheelnav-navitemtext="Romance" onmouseup=app.getUserGenre("Romance")></div>
-			    <div data-wheelnav-navitemtext="Science Fiction" onmouseup=app.getUserGenre("Science")></div>
+	<div class="mainContainer clearfix">
+		<section class="userSelectionSection">
+			<div class="circle__menu--container">
+				<h2 class="userSelectionSection__header">Choose Your Genre and Decade</h2>
+				<div id='piemenu' data-wheelnav
+				 data-wheelnav-slicepath='DonutSlice'
+				 data-wheelnav-marker data-wheelnav-markerpath='PieLineMarker'
+				 data-wheelnav-rotateoff
+				 data-wheelnav-navangle='270'
+				 data-wheelnav-cssmode 
+				 data-wheelnav-init>
+				 	<div data-wheelnav-navitemtext="Action" data-genre="Action" onmouseup=app.getUserGenre("Action")></div>
+				    <div data-wheelnav-navitemtext="Drama" onmouseup=app.getUserGenre("Drama")></div>
+				    <div data-wheelnav-navitemtext="Comedy" onmouseup=app.getUserGenre("Comedy")></div>
+				    <div data-wheelnav-navitemtext="Fantasy" onmouseup=app.getUserGenre("Fantasy")></div>
+				    <div data-wheelnav-navitemtext="Horror" onmouseup=app.getUserGenre("Horror")></div>
+				    <div data-wheelnav-navitemtext="Music" onmouseup=app.getUserGenre("Music")></div>
+				    <div data-wheelnav-navitemtext="Romance" onmouseup=app.getUserGenre("Romance")></div>
+				    <div data-wheelnav-navitemtext="Science Fiction" onmouseup=app.getUserGenre("Science")></div>
+				</div>
+				<div class="decade__selector">
+					<!-- Choose a decade -->
+					<form>
+						<select name="decade" id="decadeChoice">
+							<option value="1950s">1950s</option>
+							<option value="1960s">1960s</option>
+							<option value="1970s">1970s</option>
+							<option value="1980s">1980s</option>
+							<option value="1990s">1990s</option>
+							<option value="2000s">2000s</option>
+							<option value="2010s">2010s</option>
+						</select>
+						<br>
+						<input type="submit">
+					</form>
+				</div>
 			</div>
-			<div class="decade__selector">
-				<!-- Choose a decade -->
-				<form action="">
-					<select name="decade" id="decadeChoice">
-						<option value="1950s">1950s</option>
-						<option value="1960s">1960s</option>
-						<option value="1970s">1970s</option>
-						<option value="1980s">1980s</option>
-						<option value="1990s">1990s</option>
-						<option value="2000s">2000s</option>
-						<option value="2010s">2010s</option>
-					</select>
-					<br>
-					<input type="submit">
-				</form>
-			</div>
-		</div>
-	</section>
+		</section>
+		<aside>
+			<h3 class='description'>Welcome to <span class="title">SnackFlicks!</span> Planning a movie theme party? Use our movie generator to choose a film genre and decade and see our recommended movie list! Once you choose a film we will send you a few theme related snack recommendations to make your party unforgettable!</p>
+		</h3>
+	</div>
 	<section class="mobile">
 		<div class="decade__selector--mobile clearfix">
 			<p>Choose a decade</p>
