@@ -12,6 +12,7 @@
 	background-color: $secondary-color;
 	font-family: "Roboto", sans-serif;
 	transition: all 0.5s ease-in;
+	padding-bottom: 5%;
 }
 
 .movie__gallery--overlay {
@@ -86,9 +87,6 @@
 	max-height: 80vh;
 }
 
-.movie__info--container a {
-}
-
 .movie__descrip {
 	font-size: 2.1rem;
 	color: $primary-color;
@@ -100,4 +98,37 @@
 	font-size: 1.3rem;
 	color: #fff;
 	opacity: 0;
+}
+
+@media(max-width: 1000px) {
+	.movie__info--container {
+		width: 75%;
+	}
+}
+
+@media (max-width: 790px) {
+	#dynamicContent .movie__container {
+		width: calc(100%/2 - 2%);
+	}
+
+	#dynamicContent {
+		padding: 0;
+	}
+
+	.movie__info--container {
+		font-size: 0.8rem;
+		text-align: justify;
+		right: 0;
+		width: 100%;
+		padding: 2.5%;
+		overflow: scroll;
+	}
+
+	.movie__descrip {
+		font-size: 1.4rem;
+	}
+
+	.movie__summary {
+		font-size: 1.1rem;
+	}
 }

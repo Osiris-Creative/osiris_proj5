@@ -229,7 +229,12 @@ app.getMovieDetails = function () {
 		$(".movie__info--container").removeClass("inFocus")
 		$(".movieImage").removeClass("inFocus2");
 
-		$(".movie__container").css("width", `calc((100%/4) - 2%)`);
+		if($(window).width() < 790) {
+			$(".movie__container").css("width", `calc((100% / 2) - 2%)`)
+		} else {
+			$(".movie__container").css("width", `calc((100% / 4 ) - 2%)`);
+		}
+
 		$(".movie__info--container h2 , .movie__info--container p, .movie__info--container a, .movie__info--container img, .movie__info--container div").css("opacity", "0");
 	})
 }
