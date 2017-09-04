@@ -27,7 +27,7 @@ app.events = function(genrePicked){
 		$(".movie__gallery").css("height" , "90%");
 		$("html, body").animate({
 			scrollTop: $(".movie__gallery").offset().top
-		}, 1000)
+		}, 900)
 		app.getGenre(userSelection);
 	});
 
