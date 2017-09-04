@@ -149,14 +149,13 @@ app.getYumId = function(genreName){
 			format: 'json'
 		}
 	}).then(function(res){
-		console.log(res);
-		$('.recipe__card__wrapper').remove();
+		$(".recipe__card__wrapper").remove();
 		let recipeArr = res.matches;
 		let recipeIdList = [];
 		for (let i = 0; i < 4; i++) {
 			recipeIdList.push(recipeArr[i].id);
 		}
-		var recipeCalls = recipeIdList.map(app.getYumRecipe);
+		let recipeCalls = recipeIdList.map(app.getYumRecipe);
 	});
 };
 
