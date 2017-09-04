@@ -1,10 +1,35 @@
 //Pie nav section styling 
 
-section {
-	height: 100vh;
-	margin: 0;
-	padding: 0;
+.mainContainer{
+	position: relative;
+	background: $lightgray;  /* fallback for old browsers */
+	background:linear-gradient(to bottom, $lightgray, $secondary-color);
+	padding-bottom: 80px;
+	section {
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+		width:60%;
+		margin-right:0;
+		float:left;
+		width:60%;
+	}
+
+	aside {
+		float:left;
+		width:40%;
+		padding-top:250px;
+		padding-right:100px;
+		.title{
+			color:$primary-color;
+			text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+			font-size:22px;
+			line-height: 30px;
+			letter-spacing: 2px;
+		}
+	} 
 }
+
 
 nav {
 	clear:both;
@@ -18,33 +43,16 @@ svg {
 	text-align: center;
 	color:$black;
 	padding-top: 30px;
+	position: relative;
 }
 .userSelectionSection {
 	height: 100vh;
-	// background: linear-gradient($secodary-two, $secondary-two), url(../../public/assets/theatre.jpg) no-repeat; 
-	// // background-image: url(../../public/assets/theatre.jpg);
-	// background-size: cover;
-	background: $lightgray;  /* fallback for old browsers */
-background:linear-gradient(to bottom, $lightgray-two, $lightgray);
-
-	position: relative;
-		.overlay{
-		position: absolute;
-		top:0;
-		right:0;
-		bottom:0;
-		left:0;
-		width: 100%;
-		height: 100%;
-		// background-color: $black;
-		// mix-blend-mode:multiply;
-	}
 }
 
 .decade__selector {
 	position: absolute;
 	left: 50%;
-	top: 50%;
+	top: 550%;
 	transform: translate( -50%, -50%);
 	select, option,{
 		-webkit-appearance : none; 
@@ -112,20 +120,61 @@ background:linear-gradient(to bottom, $lightgray-two, $lightgray);
 	float: left;
 }
 
-#piemenu > svg { width: 100%; height: 100vh }
-#piemenu { height: 900px; width: 900px; margin:auto; }
-@media (max-width: 400px) { #piemenu { height: 300px; width: 300px; } }
+#piemenu > svg { 
+	width: 100%; 
+	height: 100vh; 	
+	}
+#piemenu { 
+	height: 600px; 
+	width: 600px;
+	position:absolute;
+	left:50%;
+	transform: translateX(-50%);
+	}
+@media (max-width: 400px) { 
+	#piemenu { 
+		height: 300px; 
+		width: 300px; }
+	}
 
-[class|=wheelnav-piemenu-slice-basic] { fill: $black; stroke: none; }
-[class|=wheelnav-piemenu-slice-selected] { fill: $secondary-color; stroke: none; }
-[class|=wheelnav-piemenu-slice-hover] { fill: $secondary-color-two;  stroke: none; fill-opacity: 0.77; cursor: pointer; }
+[class|=wheelnav-piemenu-slice-basic] { 
+	fill: $black; 
+	stroke: none; 
+	}
+[class|=wheelnav-piemenu-slice-selected] { 
+	fill: $secondary-color; 
+	stroke: none; }
+[class|=wheelnav-piemenu-slice-hover] { 
+	fill: $secondary-color-two;  
+	stroke: none; 
+	fill-opacity: 0.77; 
+	cursor: pointer; 
+	}
 
-[class|=wheelnav-piemenu-title-basic] { fill: #333; stroke: none; }
-[class|=wheelnav-piemenu-title-selected] { fill: $primary-color; stroke: none; }
-[class|=wheelnav-piemenu-title-hover] { fill: #222; stroke: none; cursor: pointer; }
-[class|=wheelnav-piemenu-title] > tspan { font-family: "Oswald", sans-serif; font-size: 22px; fill: #fff;}
+[class|=wheelnav-piemenu-title-basic] { 
+	fill: #333; 
+	stroke: none; 
+	}
+[class|=wheelnav-piemenu-title-selected] { 
+	fill: $primary-color; 
+	stroke: none; 
+	}
+[class|=wheelnav-piemenu-title-hover] { 
+	fill: #222; 
+	stroke: none; 
+	cursor: pointer; 
+	}
+[class|=wheelnav-piemenu-title] > tspan { 
+	font-family: "Oswald", 
+	sans-serif; font-size: 22px; 
+	fill: #fff;
+	}
 
-.wheelnav-piemenu-marker { stroke: #f6c417; stroke-width: 2; }
+.wheelnav-piemenu-marker { 
+	stroke: #f6c417; 
+	stroke-width: 2; 
+	}
+
 
 // responsive styling 
 
