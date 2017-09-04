@@ -149,19 +149,22 @@ app.getYumId = function(genreName){
 			format: 'json'
 		}
 	}).then(function(res){
-		console.log(res);
-		$('.recipe__card__wrapper').remove();
+		$(".recipe__card__wrapper").remove();
 		let recipeArr = res.matches;
 		let recipeIdList = [];
+		let recipeIngList = [];
 		for (let i = 0; i < 4; i++) {
 			recipeIdList.push(recipeArr[i].id);
+			recipeIngList.push(recipeArr[i].ingredients[i])
 		}
-		var recipeCalls = recipeIdList.map(app.getYumRecipe);
+		app.getYumRecipe(recipeIdList, recipeIngList)
+		// app.getIngList(recipeIngList);
 	});
 };
 
 //ajax call for getting recipe info 
-app.getYumRecipe = function (recipeId) {
+app.getYumRecipe = function (recipeIdList, recipeIngList) {
+	console.log(recipeIdList, recipeIngList);
 	$.ajax({
 		url: `http://api.yummly.com/v1/api/recipe/${recipeId}`,
 		method: 'GET',
@@ -251,6 +254,7 @@ app.getMovieBackdrop = function (movieId) {
 
 //function to display recipe cards to page 
 app.displayRecipe = function(recipeName, recipeUrl, recipeImg, recipeServings, recipeLgthTime){
+	console.log(recipeName);
 	let recipeImgEl = $('<img>').addClass("recipe__img").attr('src', recipeImg);
 	let recipeTitle = $('<h2>').addClass("recipe__title").append(recipeName);
 	let recipeOverlay = $('<div>').addClass("recipe__overlay");
@@ -261,6 +265,15 @@ app.displayRecipe = function(recipeName, recipeUrl, recipeImg, recipeServings, r
 	let recipeCard = $('<a>').attr('href', recipeUrl).attr('target', '_blank').append(recipeImage);
 	$('.movie__info--container').append(recipeCard);
 }
+
+//function to display ingredient list 
+// app.getIngList = function(ingList){
+// 	for (let i = 0; i < ingList.length; i++) {
+// 		let ingredients = $("<p>").addClass("recipe__ing").append(ingList[i]);
+// 		console.log(ingredients);
+// 		$(".recipe__info").append(ingredients);
+// 	}
+// }
 
 //function to display movies to page
 app.displayMovie = function(posterPath, movieDescription, movieId, movieSum){
