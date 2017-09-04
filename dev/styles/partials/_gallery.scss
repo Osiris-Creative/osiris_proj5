@@ -34,6 +34,7 @@
 		transform: scale(1.01);
 	}
 	cursor: pointer;
+	max-height: 80vh;
 }
 
 .movie__overlay {
@@ -70,6 +71,7 @@
 	a {
 		opacity: 0;
 	}
+	max-height: 80vh;
 }
 
 .movie__info--container a {
