@@ -52,7 +52,7 @@ svg {
 .decade__selector {
 	position: absolute;
 	left: 50%;
-	top: 550%;
+	top: 55%;
 	transform: translate( -50%, -50%);
 	select, option,{
 		-webkit-appearance : none; 
@@ -75,12 +75,48 @@ svg {
 	}
 }
 
+.decade__selector--mobile {
+	width: 75%;
+	margin: 0 auto;
+	select, option {
+		-webkit-appearance : none; 
+	  -moz-appearance : none; 
+	  font-family:'Oswald', sans-serif;
+	  padding: 0 12px 0 12px;
+	  background-color: $secondary-color;
+	  border:1px solid rgba(0,0,0,0);
+	  border-radius: 2px;
+	}
+	input[type="submit"]{
+		-webkit-appearance : none; 
+  	-moz-appearance : none;
+  	border:1px solid rgba(0,0,0,0);
+  	border-radius: 2px;
+  	background-color: $primary-color;
+  	margin-top: 10px; 
+  	font-family:'Oswald', sans-serif;
+  	padding: 0 10px 0 10px;
+	}
+}
+
+.decade__selector--mobile form {
+	padding-top: 1%;
+	height: 100%;
+}
+
+.decade__selector form {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+
 .circle__menu--container {
 	position: relative;
+	height: 100vh;
 }
 
 .mobile {
-	position: fixed;
 	top: 0;
 	width: 100%;
 	display: none;
@@ -182,6 +218,26 @@ svg {
 @media (max-width: 790px) {
 	.mobile {
 		display: block;
+	}
+
+	.mobile__list li {
+		padding-top: 9%;
+	}
+
+	.userSelectionSection {
+		display: none;
+	}
+
+	.mainContainer {
+		padding-bottom: 0;
+	}
+
+	.mainContainer aside {
+		float: none;
+		width: 100%;
+		padding: 0;
+		padding: 7.5%;
+		padding-top: 10%;
 	}
 }
 

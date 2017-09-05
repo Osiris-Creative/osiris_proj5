@@ -16,7 +16,10 @@ app.getUserGenre = function(genrePicked){
 }	
 // on form submit event handling
 app.events = function(genrePicked){
-	app.genrePicked = "Action"
+	app.genrePicked = "Action" //Default genre
+	$(".mobile__list li").on('click', function() {
+		app.genrePicked = $(this).text() ;
+	})
 	$("form").on('submit',function (e) {
 		e.preventDefault();
 		app.userDecade = parseInt($('#decadeChoice').val());
@@ -27,7 +30,7 @@ app.events = function(genrePicked){
 		$(".movie__gallery").css("height" , "90%");
 		$("html, body").animate({
 			scrollTop: $(".movie__gallery").offset().top
-		}, 1000)
+		}, 900)
 		app.getGenre(userSelection);
 	});
 
@@ -228,7 +231,12 @@ app.getMovieDetails = function () {
 		$(".movie__info--container").removeClass("inFocus")
 		$(".movieImage").removeClass("inFocus2");
 
-		$(".movie__container").css("width", `calc((100%/4) - 2%)`);
+		if($(window).width() < 790) {
+			$(".movie__container").css("width", `calc((100% / 2) - 2%)`)
+		} else {
+			$(".movie__container").css("width", `calc((100% / 4 ) - 2%)`);
+		}
+
 		$(".movie__info--container h2 , .movie__info--container p, .movie__info--container a, .movie__info--container img, .movie__info--container div").css("opacity", "0");
 	})
 }
