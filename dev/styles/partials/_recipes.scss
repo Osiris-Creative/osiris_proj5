@@ -48,6 +48,7 @@
 		color: white;
 		text-align: center;
 		visibility: hidden;
+		font-size: 0.9rem;
 		h2 {
 			text-transform: uppercase;
 		}
@@ -70,13 +71,29 @@
 // responsive styling 
 @media (max-width: 1000px) {
 	.recipe__card__wrapper {
-		width: calc((100%/2) - 2%);
+		h2 {
+			top: 60%;
+		}
 	}
 }
 
 @media (max-width: 790px) {
 	.recipe__card__wrapper {
-		max-width: 200px;
+		width: calc((100%/2) - 2%);
+		max-width: 150px;
+		font-size: 1.1rem;
+	}
+	.recipe__info {
+		top: 40%;
+		text-align: center;
+		font-size: 1rem;
+	}
+}
+
+//small responsive styling 
+@media (max-width: 500px) {
+	.recipe__card__wrapper {
+		font-size: 0.8rem;
 	}
 }
 
