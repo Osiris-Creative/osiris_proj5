@@ -1,5 +1,3 @@
-//Pie nav section styling 
-
 .mainContainer{
 	position: relative;
 	background: $lightgray;  /* fallback for old browsers */
@@ -152,8 +150,9 @@ svg {
 	height: 10vh;
 }
 
-.decade__selector--mobile p {
+.decade__selector--mobile h3 {
 	float: left;
+	padding-top: 12px;
 }
 
 #piemenu > svg { 
@@ -211,10 +210,8 @@ svg {
 	stroke-width: 2; 
 	}
 
-
 // responsive styling 
-
-//medium responsive styling 
+ 
 @media (max-width: 790px) {
 	.mobile {
 		display: block;
@@ -222,6 +219,16 @@ svg {
 
 	.mobile__list li {
 		padding-top: 9%;
+		border: 5px solid $lightgray;
+		border-radius: 50px;
+		font-size: 22px;
+	}
+	.mobile__list li:first-child{
+		border-top:10px solid $lightgray;
+	}
+
+	.mobile__list li:nth-child(2){
+		border-top:10px solid $lightgray;
 	}
 
 	.userSelectionSection {

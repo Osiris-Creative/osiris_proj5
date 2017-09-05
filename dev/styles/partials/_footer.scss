@@ -8,6 +8,9 @@ footer{
 		padding-top:40px;
 		padding-bottom: 40px;
 	}
+	.logo-footer__container-copyright {
+		width:100%;
+	}
 	.logo-footer__container{
 		float:left;
 		width:30%;
@@ -35,7 +38,7 @@ footer{
 			width:150px;
 			float:left;
 		}
-	.apiCredit__logo-yummly, .apiCredit__logo-movieDb{
+	.apiCredit__logo-both{
 		img{
 			width:100px;
 		}
@@ -43,7 +46,41 @@ footer{
 	.apiCredit__logo-yummly{
 		img {
 			padding-top: 15px;
+			}
 		}
 	}
+}
+// responsive styling
+
+@media (max-width: 790px) {
+	footer {
+		.apiCredit {
+		width:50%;
+		}
+		.logo-footer__container-copyright{
+		width:70%;
+		}
 	}
 }
+
+@media (max-width: 480px) {
+	footer {
+		.logo-footer__container{
+			margin-left: 10%;
+			margin-top: 3%;
+		}
+		.apiCredit {
+		width:100%;
+		}
+		.logo-footer__container-copyright{
+		width:100%;
+		}
+		.apiCredit {
+			float:none;
+			p{
+				margin-left: 12%;
+			}
+		}
+	}
+}
+

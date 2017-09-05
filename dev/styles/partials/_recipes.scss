@@ -1,5 +1,3 @@
-// recipe card styling
-
 .recipe__card__wrapper {
 	display: inline-block;
 	width: calc((100%/4) - 2%);
@@ -69,23 +67,16 @@
 	}
 }
 
-//responsive styling for recipes
-
-//large responsive styling 
+// responsive styling 
 @media (max-width: 1000px) {
 	.recipe__card__wrapper {
 		width: calc((100%/2) - 2%);
 	}
 }
 
-//medium responsive styling 
 @media (max-width: 790px) {
 	.recipe__card__wrapper {
 		max-width: 200px;
 	}
 }
 
-//small responsive styling 
-// @media (max-width: 790px) {
-	
-// }
