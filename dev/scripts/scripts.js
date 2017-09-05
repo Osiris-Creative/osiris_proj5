@@ -20,6 +20,7 @@ app.events = function(genrePicked){
 	$(".mobile__list li").on('click', function() {
 		app.genrePicked = $(this).text() ;
 	})
+
 	$("form").on('submit',function (e) {
 		e.preventDefault();
 		app.userDecade = parseInt($('#decadeChoice').val());
@@ -27,10 +28,11 @@ app.events = function(genrePicked){
 			userGenre: app.genrePicked,
 			userDecade: app.userDecade
 		}
-		$(".movie__gallery").css("height" , "90%");
+		$(".movie__gallery").css("height" , "100%");
 		$("html, body").animate({
 			scrollTop: $(".movie__gallery").offset().top
 		}, 900)
+		$(".movie__gallery--btn").fadeIn();
 		app.getGenre(userSelection);
 	});
 
@@ -79,6 +81,9 @@ app.getMovieData = function(genreId,results){
 		//Clear movie list
 		$("#dynamicContent").empty();
 		let movieArray = res.results; 
+		$(".movie__gallery--btn").on('click', function() {
+			app.movieCarousel(movieArray);
+		})
 		app.movieCarousel(movieArray)
 	});
 };
@@ -87,10 +92,12 @@ app.getMovieData = function(genreId,results){
 var count =  0;
 var upperLimit = 4;
 
+
 app.movieCarousel = function(movieArray) {
+		$("#dynamicContent").empty();
+
 		if (count >= 0 && count < 20) {
 			while(count < upperLimit) {
-				console.log(count)
 				let posterPathJpg = movieArray[count].poster_path
 				let movieDescription = movieArray[count].title;
 				var posterPath = `https://image.tmdb.org/t/p/w500${posterPathJpg}`;
@@ -109,7 +116,7 @@ app.movieCarousel = function(movieArray) {
 			upperLimit = 4;
 			app.movieCarousel(movieArray);
 		} 
-	} 
+}
 
 // ajax call for getting recipe ID based on user genre selection
 app.getYumId = function(genreName){
@@ -200,6 +207,7 @@ app.getMovieDetails = function () {
 		app.collisionInterval();
 		let movieId = $(this).data("id");
 		app.getMovieBackdrop(movieId);
+		$(".movie__gallery--btn").fadeOut(10);
 		$(".movie__info--container").removeClass("inFocus")
 		$(".movie__gallery--overlay").css("opacity","0.75");
 		$(".movieImage").removeClass("inFocus2");
@@ -210,23 +218,11 @@ app.getMovieDetails = function () {
 		$("*", this).css({
 		    'opacity' : '1',
 		});
-		// $("p", this).css({
-		// 	'opacity' : '1',
-		// })
-		// $("div", this).css({
-		// 	'opacity' : '1',
-		// })
-		// $("img", this).css({
-		// 	'opacity' : '1',
-		// })
-		// $("a", this).css({
-		// 	'opacity' : '1',
-		// })
-		// console.log(this);
 	});
 
 	$(".movie__gallery--overlay").on('click', function(){
 		app.collisionInterval(false);
+		$(".movie__gallery--btn").fadeIn();
 		$(".movieImage").css("opacity", "1");
 		$(".movie__info--container").removeClass("inFocus")
 		$(".movieImage").removeClass("inFocus2");
@@ -324,6 +320,7 @@ app.renderMenu = function() {
 	piemenu.initPercent = 0.2;
 	piemenu.wheelRadius = piemenu.wheelRadius * 0.83;
 	piemenu.createWheel();
+	$(".movie__gallery--btn").fadeOut();
 }
 
 // make init function
@@ -336,7 +333,7 @@ app.init = function(){
 	$(window).on('load', function(){
 		$('html, body').animate({
 			scrollTop: $('body').offset().top
-		}, 1000);
+		}, 100);
 	});
 	//on click of header bring user to wheel
 	$('.logoContainer').on('click', function() {
