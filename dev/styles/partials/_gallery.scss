@@ -124,7 +124,8 @@
 		text-align: justify;
 		right: 0;
 		width: 100%;
-		padding: 2.5%;
+		padding-left: 20%;
+		padding-right: 20%;
 	}
 
 	.movie__descrip {
@@ -133,5 +134,18 @@
 
 	.movie__summary {
 		font-size: 1.1rem;
+		max-height: 160px;
+    	overflow: hidden;
 	}
 }
+
+//small responsive styling 
+@media (max-width: 500px) {
+	.movie__info--container {
+		padding-top: 0px;
+	}
+	.movie__summary {
+		max-height: 140px;
+	}
+}
+
