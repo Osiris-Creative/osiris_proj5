@@ -147,7 +147,7 @@ app.getYumId = function (genreName) {
 			keyWords = "alien";
 	}
 	$.ajax({
-		url: 'http://api.yummly.com/v1/api/recipes?excludedCourse=course^course-Beverages&excludedCourse=course^course-Condiments and Sauces&excludedCourse=course^course-Cocktails&excludedCourse=course^course-Soup&excludedCourse=course^course-Breads',
+		url: 'https://api.yummly.com/v1/api/recipes?excludedCourse=course^course-Beverages&excludedCourse=course^course-Condiments and Sauces&excludedCourse=course^course-Cocktails&excludedCourse=course^course-Soup&excludedCourse=course^course-Breads',
 		method: 'GET',
 		dataType: 'json',
 		data: {
@@ -172,7 +172,7 @@ app.getYumId = function (genreName) {
 //ajax call for getting recipe info 
 app.getYumRecipe = function (recipeId) {
 	$.ajax({
-		url: 'http://api.yummly.com/v1/api/recipe/' + recipeId,
+		url: 'https://api.yummly.com/v1/api/recipe/' + recipeId,
 		method: 'GET',
 		dataType: 'json',
 		data: {
